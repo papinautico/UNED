@@ -58,23 +58,38 @@
   <h2>1) Mercado competitivo (lineal)</h2>
 
   <div class="formula">\(Q_D = a - b\,p\)
+    <div class="legend"><b>Nombre:</b> Demanda (forma lineal)</div>
     <div class="legend">\(Q_D\): cantidad demandada; \(p\): precio; \(a&gt;0\): intercepto de demanda; \(b&gt;0\): pendiente (sensibilidad al precio).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Para modelar cómo varía la cantidad demandada cuando cambia el precio; base de equilibrio y elasticidades.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(a=120\), \(b=3\), \(p=20\) ⇒ \(Q_D=120-3\cdot20=60\).</div>
   </div>
 
   <div class="formula">\(Q_S = -c + d\,p\)
+    <div class="legend"><b>Nombre:</b> Oferta (forma lineal)</div>
     <div class="legend">\(Q_S\): cantidad ofrecida; \(p\): precio; \(c&gt;0\): intercepto (umbral/coste); \(d&gt;0\): pendiente (sensibilidad de la oferta).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Para describir cómo responde la cantidad ofrecida al precio; útil para shocks de costes.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(c=30\), \(d=2\), \(p=20\) ⇒ \(Q_S=-30+2\cdot20=10\).</div>
   </div>
 
   <div class="formula">\(p^{*} = \frac{a + c}{b + d},\qquad q^{*} = a - b\,p^{*}\)
+    <div class="legend"><b>Nombre:</b> Precio y cantidad de equilibrio</div>
     <div class="legend">\(p^*\): precio de equilibrio; \(q^*\): cantidad de equilibrio; \(a,b,c,d\): parámetros de demanda y oferta.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Para hallar el punto donde planes de compradores y vendedores coinciden.</div>
+    <div class="legend"><b>Ejemplo:</b> \(a=120\), \(b=3\), \(c=30\), \(d=2\) ⇒ \(p^*=(120+30)/(3+2)=30\), \(q^*=120-3\cdot30=30\).</div>
   </div>
 
   <div class="formula">\(EC = \tfrac{1}{2}\,(p_{\mathrm{intD}} - p^{*})\,q^{*},\qquad EP = \tfrac{1}{2}\,(p^{*} - p_{\mathrm{intS}})\,q^{*}\)
-    <div class="legend">\(EC\): excedente del consumidor; \(EP\): excedente del productor; \(p_{\text{intD}}=a/b\): corte de demanda con eje precio; \(p_{\text{intS}}=c/d\): corte de oferta con eje precio.</div>
+    <div class="legend"><b>Nombre:</b> Excedente del consumidor (EC) y del productor (EP)</div>
+    <div class="legend">\(EC\): excedente del consumidor; \(EP\): excedente del productor; \(p_{\text{intD}}=a/b\): corte de demanda; \(p_{\text{intS}}=c/d\): corte de oferta.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Medir bienestar de consumidores y productores en equilibrio.</div>
+    <div class="legend"><b>Ejemplo:</b> Con \(a=120,b=3,c=30,d=2\): \(p_{\text{intD}}=40\), \(p_{\text{intS}}=15\), \(p^*=q^*=30\). EC=\(½(40-30)·30=150\); EP=\(½(30-15)·30=225\).</div>
   </div>
 
   <div class="formula">\(IT = p\cdot Q\)
+    <div class="legend"><b>Nombre:</b> Ingreso total (IT)</div>
     <div class="legend">\(IT\): ingreso total; \(p\): precio; \(Q\): cantidad vendida.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Evaluar ingresos de ventas y su relación con la elasticidad.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(p=20\) y \(Q=60\) ⇒ \(IT=1\,200\).</div>
   </div>
 </section>
 
@@ -82,23 +97,38 @@
   <h2>2) Elasticidades</h2>
 
   <div class="formula">\(\varepsilon_p = \dfrac{dQ}{dp}\cdot\dfrac{p}{Q}\)
-    <div class="legend">\(\varepsilon_p\): elasticidad-precio de la demanda; \(dQ/dp\): derivada de \(Q\) respecto a \(p\); \(p\): precio; \(Q\): cantidad.</div>
+    <div class="legend"><b>Nombre:</b> Elasticidad-precio puntual de la demanda</div>
+    <div class="legend">\(\varepsilon_p\): elasticidad-precio; \(dQ/dp\): derivada de \(Q\) respecto a \(p\); \(p\): precio; \(Q\): cantidad.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Medir sensibilidad de \(Q\) ante cambios muy pequeños en \(p\).</div>
+    <div class="legend"><b>Ejemplo:</b> En \(Q=120-3p\), punto \(p=20\), \(Q=60\): \(\varepsilon=-(3·20)/60=-1\).</div>
   </div>
 
   <div class="formula">\(\text{Si } Q=a-bp,\quad \varepsilon_p = -\dfrac{b\,p}{Q}\)
-    <div class="legend">\(a,b\): parámetros; \(p,Q\): precio y cantidad en el punto.</div>
+    <div class="legend"><b>Nombre:</b> Elasticidad en demanda lineal</div>
+    <div class="legend">\(a,b\): parámetros; \(p,Q\): punto de evaluación.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Cálculo directo de \(\varepsilon\) sin derivar explícitamente.</div>
+    <div class="legend"><b>Ejemplo:</b> Con \(a=120,b=3\), en \(p=30\), \(Q=30\): \(\varepsilon=-(3·30)/30=-3\).</div>
   </div>
 
   <div class="formula">\(\varepsilon_{\mathrm{arco}} = \dfrac{\Delta Q}{\Delta p}\cdot \dfrac{p_1+p_2}{Q_1+Q_2}\)
-    <div class="legend">\(\Delta Q=Q_2-Q_1\); \(\Delta p=p_2-p_1\); \(p_1,p_2\): precios; \(Q_1,Q_2\): cantidades asociadas.</div>
+    <div class="legend"><b>Nombre:</b> Elasticidad arco</div>
+    <div class="legend">\(\Delta Q=Q_2-Q_1\); \(\Delta p=p_2-p_1\); \(p_1,p_2\): precios; \(Q_1,Q_2\): cantidades.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Medir sensibilidad media entre dos puntos alejados.</div>
+    <div class="legend"><b>Ejemplo:</b> Entre \(p_1=20,Q_1=60\) y \(p_2=30,Q_2=30\): \(\varepsilon\approx-1{,}667\).</div>
   </div>
 
   <div class="formula">\(MR = \dfrac{d(pQ)}{dQ}\)
+    <div class="legend"><b>Nombre:</b> Ingreso marginal (definición)</div>
     <div class="legend">\(MR\): ingreso marginal; \(p(Q)\): precio como función de \(Q\); \(Q\): cantidad.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Regla óptima de producción/precio con poder de mercado (igualar \(MR=MC\)).</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(p(Q)=100-2Q\), entonces \(MR=100-4Q\); en \(Q=20\) ⇒ \(MR=20\).</div>
   </div>
 
   <div class="formula">\(\text{Si } p(Q)=a-bQ,\quad MR = a - 2bQ\)
+    <div class="legend"><b>Nombre:</b> Ingreso marginal con demanda inversa lineal</div>
     <div class="legend">\(a,b\): parámetros de la demanda inversa; \(Q\): cantidad.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Cerrar el sistema \(MR=MC\) en monopolio u oligopolio.</div>
+    <div class="legend"><b>Ejemplo:</b> \(a=100,b=2\): \(MR=100-4Q\).</div>
   </div>
 </section>
 
@@ -106,19 +136,31 @@
   <h2>3) Impuestos, subsidios e incidencia</h2>
 
   <div class="formula">\(p_c = \dfrac{a+c+t}{b+d},\qquad q = a - b\,p_c,\qquad p_p = p_c - t\)
-    <div class="legend">\(t\): impuesto por unidad; \(p_c\): precio pagado por consumidores; \(p_p\): precio neto recibido por productores; \(q\): cantidad tras el impuesto.</div>
+    <div class="legend"><b>Nombre:</b> Equilibrio con impuesto específico (a productores)</div>
+    <div class="legend">\(t\): impuesto por unidad; \(p_c\): precio pagado por consumidores; \(p_p\): precio neto de productores; \(q\): cantidad tras impuesto.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Predecir precios pagados/recibidos y cantidad tras un impuesto.</div>
+    <div class="legend"><b>Ejemplo:</b> \(a=100,b=2,c=20,d=3,t=10\) ⇒ \(p_c=26\), \(q=48\), \(p_p=16\).</div>
   </div>
 
   <div class="formula">\(T = t \cdot q,\qquad \mathrm{DWL} \approx \tfrac{1}{2}\, t\,(q_0 - q_1)\)
-    <div class="legend">\(T\): recaudación; \(t\): impuesto unitario; \(q_0\): cantidad sin impuesto; \(q_1\): cantidad con impuesto; \(\mathrm{DWL}\): pérdida de eficiencia.</div>
+    <div class="legend"><b>Nombre:</b> Recaudación y pérdida irrecuperable (DWL)</div>
+    <div class="legend">\(T\): recaudación; \(q_0\): cantidad sin impuesto; \(q_1\): con impuesto.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Medir ingresos fiscales y eficiencia perdida por menor \(q\).</div>
+    <div class="legend"><b>Ejemplo:</b> Sin impuesto \(p_0=24,q_0=52\); con \(t=10\) ⇒ \(q_1=48\). \(T=480\); \(\mathrm{DWL}\approx20\).</div>
   </div>
 
   <div class="formula">\(\text{Incidencia en cons. } \approx \dfrac{E_S}{E_S + |E_D|},\qquad \text{en prod. } \approx \dfrac{|E_D|}{E_S + |E_D|}\)
-    <div class="legend">\(E_S\): elasticidad-precio de la oferta; \(E_D\): elasticidad-precio de la demanda (usar valor absoluto).</div>
+    <div class="legend"><b>Nombre:</b> Incidencia del impuesto por elasticidades</div>
+    <div class="legend">\(E_S\): elasticidad de oferta; \(E_D\): elasticidad de demanda (usar \(|E_D|\)).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Aproximar qué parte del impuesto soporta cada lado del mercado.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(E_S=1\) y \(|E_D|=2\) ⇒ consumidores ≈ \(1/3\), productores ≈ \(2/3\).</div>
   </div>
 
   <div class="formula">\(Q = a - b\,(p - s) \;=\; (a+bs) - b\,p\)
-    <div class="legend">\(s\): subsidio por unidad a consumidores; \(a,b,p,Q\): como antes.</div>
+    <div class="legend"><b>Nombre:</b> Demanda efectiva con subsidio al consumidor</div>
+    <div class="legend">\(s\): subsidio por unidad; \(a,b,p,Q\): como antes.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Evaluar efectos de subsidios en precios, cantidades y bienestar.</div>
+    <div class="legend"><b>Ejemplo:</b> \(a=100,b=2,s=5,c=20,d=3\) ⇒ \(p=26\), \(q=58\); consumidor paga \(p-s=21\), productor recibe \(26\).</div>
   </div>
 </section>
 
@@ -126,11 +168,17 @@
   <h2>4) Controles de precio</h2>
 
   <div class="formula">\(\text{Techo } (\bar p < p^{*}):\quad \mathrm{Escasez} = Q_D(\bar p) - Q_S(\bar p)\)
-    <div class="legend">\(\bar p\): precio máximo legal; \(Q_D(\bar p)\): demanda a \(\bar p\); \(Q_S(\bar p)\): oferta a \(\bar p\).</div>
+    <div class="legend"><b>Nombre:</b> Techo de precio (precio máximo)</div>
+    <div class="legend">\(\bar p\): precio máximo; diferencias entre \(Q_D\) y \(Q_S\) miden la escasez.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Estimar faltantes y efectos colaterales (colas, racionamiento).</div>
+    <div class="legend"><b>Ejemplo:</b> Con \(a=120,b=3,c=30,d=2\), \(\bar p=25\): \(Q_D=45\), \(Q_S=20\) ⇒ escasez \(=25\).</div>
   </div>
 
   <div class="formula">\(\text{Mínimo } (p_{\min} > p^{*}):\quad \mathrm{Excedente} = Q_S(p_{\min}) - Q_D(p_{\min})\)
-    <div class="legend">\(p_{\min}\): precio mínimo legal; \(Q_S, Q_D\): oferta y demanda evaluadas en \(p_{\min}\).</div>
+    <div class="legend"><b>Nombre:</b> Precio mínimo (suelo de precio)</div>
+    <div class="legend">Excedente \(=Q_S-Q_D\) a \(p_{\min}\).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Medir excedentes y coste fiscal si el gobierno compra la sobreoferta.</div>
+    <div class="legend"><b>Ejemplo:</b> Con los mismos datos, \(p_{\min}=35\): \(Q_D=15\), \(Q_S=40\) ⇒ excedente \(=25\).</div>
   </div>
 </section>
 
@@ -138,27 +186,45 @@
   <h2>5) Consumidor</h2>
 
   <div class="formula">\(p_x x + p_y y = m\)
-    <div class="legend">Recta presupuestaria; \(x,y\): cantidades; \(p_x,p_y\): precios; \(m\): renta.</div>
+    <div class="legend"><b>Nombre:</b> Restricción presupuestaria</div>
+    <div class="legend">Recta presupuesto; \(x,y\): cantidades; \(p_x,p_y\): precios; \(m\): renta.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Delimitar cestas asequibles y estudiar efectos de cambios en precios/renta.</div>
+    <div class="legend"><b>Ejemplo:</b> \(m=120\), \(p_x=3\), \(p_y=2\): si compras \(x=20\) ⇒ \(3·20=60\), queda \(60\) para \(y\) ⇒ \(y=30\).</div>
   </div>
 
   <div class="formula">\(\mathrm{MRS}_{xy} = \dfrac{\partial U/\partial x}{\partial U/\partial y}\)
-    <div class="legend">\(\mathrm{MRS}\): tasa marginal de sustitución; \(U\): utilidad; \(\partial U/\partial x\) y \(\partial U/\partial y\): utilidades marginales.</div>
+    <div class="legend"><b>Nombre:</b> Tasa marginal de sustitución (MRS)</div>
+    <div class="legend">\(\mathrm{MRS}\): tasa de intercambio subjetivo entre bienes.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Regla de tangencia con precios en el óptimo interior.</div>
+    <div class="legend"><b>Ejemplo:</b> \(U=\sqrt{xy}\) ⇒ \(\mathrm{MRS}=y/x\). En \((x,y)=(10,20)\), \(\mathrm{MRS}=2\).</div>
   </div>
 
   <div class="formula">\(\text{Óptimo interior: }\ \mathrm{MRS}_{xy} = \dfrac{p_x}{p_y},\qquad p_x x + p_y y = m\)
-    <div class="legend">Igualdad entre la pendiente de la indiferencia y la del presupuesto; presupuesto agotado.</div>
+    <div class="legend"><b>Nombre:</b> Condición de óptimo del consumidor</div>
+    <div class="legend">Tangencia MRS con precios + presupuesto agotado.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Hallar la cesta óptima cuando hay interioridad.</div>
+    <div class="legend"><b>Ejemplo:</b> Con \(U=\sqrt{xy}\), \(p_x=3\), \(p_y=2\), \(m=120\): \(\mathrm{MRS}=y/x=p_x/p_y=1.5\) ⇒ \(y=1.5x\). En el presupuesto \(3x+2y=120\) ⇒ \(x=20\), \(y=30\).</div>
   </div>
 
   <div class="formula">\(U=x^{\alpha} y^{1-\alpha}\ \Rightarrow\ x^{*}=\dfrac{\alpha m}{p_x},\quad y^{*}=\dfrac{(1-\alpha)m}{p_y}\)
-    <div class="legend">Cobb–Douglas; \(\alpha\in(0,1)\): peso de X; \(m\): renta; \(p_x,p_y\): precios.</div>
+    <div class="legend"><b>Nombre:</b> Demanda Marshalliana Cobb–Douglas</div>
+    <div class="legend">Cobb–Douglas; \(\alpha\in(0,1)\).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Solución cerrada del óptimo: gasto proporcional.</div>
+    <div class="legend"><b>Ejemplo:</b> \(\alpha=0.4\), \(m=120\), \(p_x=3\), \(p_y=2\) ⇒ \(x^*=16\), \(y^*=36\).</div>
   </div>
 
   <div class="formula">\(U=ax+by\quad\) (sustitutos perfectos)
-    <div class="legend">\(a,b&gt;0\): utilidad por unidad; óptimo en esquina (comprar el de mayor \(a/p_x\) o \(b/p_y\)).</div>
+    <div class="legend"><b>Nombre:</b> Preferencias de sustitutos perfectos</div>
+    <div class="legend">\(a,b&gt;0\): utilidad por unidad.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Mostrar óptimos en esquina (elegir el bien con mayor utilidad por euro).</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(a=1,b=1,p_x=3,p_y=2\) ⇒ comprar solo \(y\).</div>
   </div>
 
   <div class="formula">\(U=\min\{a x, b y\}\quad\) (complementos, Leontief)
-    <div class="legend">\(a,b&gt;0\): proporciones fijas; consumo en la razón \(a x = b y\).</div>
+    <div class="legend"><b>Nombre:</b> Preferencias de complementos perfectos</div>
+    <div class="legend">\(a,b&gt;0\): proporciones fijas.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Óptimos en “L” (consumo en proporción fija).</div>
+    <div class="legend"><b>Ejemplo:</b> \(U=\min\{x,2y\}\) ⇒ consumir con \(x=2y\).</div>
   </div>
 </section>
 
@@ -166,15 +232,24 @@
   <h2>6) Producción y costes</h2>
 
   <div class="formula">\(C(q) = F + \beta q + \gamma q^{2}\)
+    <div class="legend"><b>Nombre:</b> Coste total (forma cuadrática)</div>
     <div class="legend">\(C(q)\): coste total; \(q\): producción; \(F\): coste fijo; \(\beta,\gamma&gt;0\): parámetros.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Modelar costes con CMg creciente.</div>
+    <div class="legend"><b>Ejemplo:</b> \(F=100\), \(\beta=10\), \(\gamma=0.5\) ⇒ \(C(20)=100+200+200=500\).</div>
   </div>
 
   <div class="formula">\(MC = \beta + 2\gamma q,\qquad AVC = \dfrac{\beta}{q} + \gamma q,\qquad ATC = \dfrac{F}{q} + AVC\)
+    <div class="legend"><b>Nombre:</b> Coste marginal y costes medios</div>
     <div class="legend">\(MC\): coste marginal; \(AVC\): coste variable medio; \(ATC\): coste total medio.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Reglas de producción/entrada y condición de cierre.</div>
+    <div class="legend"><b>Ejemplo:</b> Con los valores anteriores: \(MC(20)=10+2·0.5·20=30\); \(AVC(20)=10/20+0.5·20=10.5\); \(ATC(20)=100/20+10.5=15.5\).</div>
   </div>
 
   <div class="formula">\(\text{Cierre CP: producir si } p \ge \min AVC\)
-    <div class="legend">\(p\): precio de mercado; \(\min AVC\): mínimo del coste variable medio.</div>
+    <div class="legend"><b>Nombre:</b> Regla de cierre a corto plazo</div>
+    <div class="legend">\(p\): precio; \(\min AVC\): mínimo del coste variable medio.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Decidir producir o parar temporalmente.</div>
+    <div class="legend"><b>Ejemplo:</b> Para \(AVC=\beta/q+\gamma q\) el mínimo es \(2\sqrt{\beta\gamma}\). Con \(\beta=10,\gamma=0.5\) ⇒ \(\min AVC\approx4.47\).</div>
   </div>
 </section>
 
@@ -182,11 +257,17 @@
   <h2>7) Competencia perfecta</h2>
 
   <div class="formula">\(p = MC(q)\quad \text{si } p \ge \min AVC\)
-    <div class="legend">Óptimo de la empresa competitiva (corto plazo).</div>
+    <div class="legend"><b>Nombre:</b> Regla de producción en competencia</div>
+    <div class="legend">Óptimo de la empresa competitiva a CP.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Elegir \(q^*\) dado el precio del mercado.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(p=30\) y \(MC=10+1q\) ⇒ \(q^*=20\) (cumple \(p\ge\min AVC\)).</div>
   </div>
 
   <div class="formula">\(\text{Oferta individual: tramo de } MC \text{ por encima de } AVC\)
-    <div class="legend">La parte de \(MC\) situada por encima de \(AVC\) define la oferta de la firma.</div>
+    <div class="legend"><b>Nombre:</b> Oferta de la empresa</div>
+    <div class="legend">Tramo de \(MC\) sobre \(AVC\).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Construir oferta del sector (sumando horizontalmente).</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(MC=10+q\) y \(\min AVC=5\), la oferta individual comienza en \(p=5\).</div>
   </div>
 </section>
 
@@ -194,15 +275,24 @@
   <h2>8) Monopolio (lineal)</h2>
 
   <div class="formula">\(p = a - bQ,\qquad MR = a - 2bQ\)
-    <div class="legend">Demanda inversa y su ingreso marginal; \(a,b&gt;0\): parámetros; \(Q\): cantidad.</div>
+    <div class="legend"><b>Nombre:</b> Demanda inversa y su ingreso marginal</div>
+    <div class="legend">\(a,b&gt;0\): parámetros; \(Q\): cantidad.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Base para fijación de precio/cantidad en monopolio: resolver \(MR=MC\).</div>
+    <div class="legend"><b>Ejemplo:</b> \(a=100,b=2\) ⇒ \(MR=100-4Q\).</div>
   </div>
 
   <div class="formula">\(Q_M = \dfrac{a - c}{2b},\qquad p_M = a - b Q_M\)
-    <div class="legend">\(MC=c\) constante; \(Q_M\): cantidad de monopolio; \(p_M\): precio monopolístico.</div>
+    <div class="legend"><b>Nombre:</b> Cantidad y precio óptimos del monopolio</div>
+    <div class="legend">\(MC=c\) constante.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Solución cerrada del problema del monopolista con demanda lineal.</div>
+    <div class="legend"><b>Ejemplo:</b> \(a=100,b=2,c=20\) ⇒ \(Q_M=20\), \(p_M=60\).</div>
   </div>
 
   <div class="formula">\(\dfrac{p - MC}{p} = -\dfrac{1}{\varepsilon}\)
-    <div class="legend">Índice de Lerner; \(\varepsilon\): elasticidad-precio de la demanda (magnitud en el óptimo).</div>
+    <div class="legend"><b>Nombre:</b> Índice de Lerner</div>
+    <div class="legend">\(\varepsilon\): elasticidad-precio de la demanda (magnitud).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Relacionar poder de mercado con la elasticidad.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(|\varepsilon|=2\) ⇒ \((p-MC)/p=0.5\) (markup del 50%).</div>
   </div>
 </section>
 
@@ -210,11 +300,17 @@
   <h2>9) Oligopolio (recordatorio)</h2>
 
   <div class="formula">\(q_i^{*} = \dfrac{a - c}{b(n+1)},\qquad Q^{*} = \dfrac{n(a - c)}{b(n+1)},\qquad p^{*} = a - bQ^{*}\)
-    <div class="legend">Cournot simétrico con \(n\) firmas; \(a,b\): demanda inversa; \(c\): \(MC\) constante.</div>
+    <div class="legend"><b>Nombre:</b> Equilibrio de Cournot (simétrico)</div>
+    <div class="legend">\(n\): nº de firmas; \(a,b\): demanda inversa; \(c\): \(MC\) constante.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Comparar resultado oligopólico con monopolio y competencia.</div>
+    <div class="legend"><b>Ejemplo:</b> \(a=100,b=1,c=20,n=2\) ⇒ \(q_i=80/3\), \(Q\approx53.33\), \(p\approx46.67\).</div>
   </div>
 
   <div class="formula">\(p = MC\quad \text{(Bertrand homogéneo)}\)
-    <div class="legend">Con bienes homogéneos y mismos costes/capacidad, el equilibrio lleva a \(p=MC\).</div>
+    <div class="legend"><b>Nombre:</b> Equilibrio de Bertrand (bienes homogéneos)</div>
+    <div class="legend">Precio igual al coste marginal bajo supuestos estándar.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Mostrar “paradoja” de competencia en precios con productos idénticos.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(MC=20\), entonces \(p=20\).</div>
   </div>
 </section>
 
@@ -222,11 +318,17 @@
   <h2>10) Externalidades</h2>
 
   <div class="formula">\(MB(Q) = SMC(Q) = PMC(Q) + MEC(Q)\)
-    <div class="legend">\(MB\): beneficio marginal (demanda); \(PMC\): coste marginal privado; \(MEC\): coste marginal externo; \(SMC\): coste marginal social.</div>
+    <div class="legend"><b>Nombre:</b> Condición de óptimo social con externalidades</div>
+    <div class="legend">\(MB\): beneficio marginal; \(PMC\): coste marginal privado; \(MEC\): coste marginal externo; \(SMC\): coste marginal social.</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Determinar la cantidad eficiente internalizando costes externos.</div>
+    <div class="legend"><b>Ejemplo:</b> Si a \(Q=30\), \(MEC=4\) ⇒ el precio socialmente eficiente debe reflejar \(+4\) sobre \(PMC\).</div>
   </div>
 
   <div class="formula">\(t^{*} = MEC(Q^{*}_{\text{social}})\)
-    <div class="legend">Impuesto pigouviano óptimo: igual al coste externo marginal en la cantidad socialmente eficiente.</div>
+    <div class="legend"><b>Nombre:</b> Impuesto pigouviano óptimo</div>
+    <div class="legend">Impuesto por unidad igual al coste externo marginal en \(Q^*_{social}\).</div>
+    <div class="legend"><b>¿Para qué se usa?</b> Corregir externalidades negativas alineando incentivos privados y sociales.</div>
+    <div class="legend"><b>Ejemplo:</b> Si \(MEC(30)=4\) ⇒ \(t^*=4\) €/u.</div>
   </div>
 </section>
 
