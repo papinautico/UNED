@@ -1,0 +1,68 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Documentos UNED</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; color: #333; }
+        h1 { color: #2c3e50; text-align: center; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 10px 0; }
+        a { text-decoration: none; color: #3498db; padding: 5px 10px; border: 1px solid #3498db; border-radius: 3px; }
+        a:hover { background-color: #3498db; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Portal de Documentos UNED</h1>
+    <p>Bienvenido a mi colección de documentos HTML. Haz clic en los enlaces para acceder a cada archivo:</p>
+    <ul>
+        <li><a href="Suite-UNED-v3-FIX.html" target="_blank">Suite-UNED-v3-FIX</a></li>
+        <li><a href="guia de microeconomia - teoria 2.html" target="_blank">Guía de Microeconomía - Teoría 2</a></li>
+        <li><a href="guia de microeconomia.html" target="_blank">Guía de Microeconomía</a></li>
+        <li><a href="mathjax formulas creo.html" target="_blank">MathJax Formulas Creo</a></li>
+        <li><a href="pagina para estudiar.html" target="_blank">Página para Estudiar</a></li>
+        <li><a href="tabla-derivadas.html" target="_blank">Tabla de Derivadas</a></li>
+    </ul>
+    <p>Nota: Los archivos se abren en una nueva pestaña. Asegúrate de que GitHub Pages esté configurado para acceder a ellos.</p>
+</body>
+</html>
