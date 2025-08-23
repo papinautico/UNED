@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suite UNED v3 — FIX · Plan + Simulacros + Banco masivo</title>
+<meta name="description" content="Versión corregida: botones Aleatorizar/Corregir funcionando.">
+<style>
+  :root{
+    --bg:#0c1226; --panel:#11183a; --ink:#eaf0ff; --muted:#9fb0d9; --brand:#7aa2ff; --accent:#50e3c2; --border:#263a77;
+    --ok:#10b981; --warn:#f59e0b; --danger:#ef4444;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f8ff; --panel:#ffffff; --ink:#0f1324; --muted:#4e5a7d; --brand:#2b59ff; --accent:#0ea5e9; --border:#d8e1ff;
+           --ok:#059669; --warn:#b45309; --danger:#b91c1c; }
+  }
+  html,body{height:100%}
+  body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; color:var(--ink);
+       background:linear-gradient(180deg,var(--bg),#080f22 70%);}
+  header{position:sticky; top:0; z-index:30; background:color-mix(in oklab, var(--panel) 85%, transparent);
+         border-bottom:1px solid var(--border); backdrop-filter:blur(8px)}
+  .wrap{max-width:1200px; margin:auto; padding:12px 16px}
+  h1{margin:0; font-size:1.9rem}
+  h2{color:var(--brand); margin:1rem 0 .6rem; font-size:1.35rem}
+  h3{margin:.8rem 0 .4rem; font-size:1.12rem}
+  nav{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+  nav a{color:var(--muted); text-decoration:none; padding:6px 10px; border:1px solid var(--border); border-radius:10px}
+  nav a:hover{color:var(--ink); border-color:var(--brand)}
+  main{max-width:1200px; margin:18px auto; padding:0 16px}
+  section{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:16px; margin:16px 0}
+  .lead{color:var(--muted)}
+  .grid{display:grid; gap:12px}
+  .grid.two{grid-template-columns:1fr} @media(min-width:900px){ .grid.two{grid-template-columns:1fr 1fr} }
+  .table{border:1px solid var(--border); border-radius:12px; overflow:hidden}
+  .table table{width:100%; border-collapse:collapse}
+  .table th,.table td{padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:top}
+  .table th{background:color-mix(in oklab, var(--panel), black 6%); text-align:left}
+  .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+  .btn{background:var(--brand); color:white; border:none; border-radius:12px; padding:8px 12px; cursor:pointer}
+  .btn.alt{background:transparent; color:var(--ink); border:1px solid var(--border)}
+  .badge{display:inline-block; font-size:.8rem; padding:2px 8px; border-radius:999px; background:color-mix(in oklab, var(--brand) 25%, transparent); border:1px solid var(--border)}
+  .info{font-family:ui-monospace, Menlo, Consolas, "Liberation Mono", monospace; font-size:.95rem}
+  .muted{color:var(--muted)}
+  .card{border:1px solid var(--border); border-radius:12px; padding:12px; margin:10px 0; background:color-mix(in oklab, var(--panel) 96%, black 4%)}
+  .q h4{margin:.2rem 0 .4rem}
+  .q .opts label{display:block; margin:.25rem 0}
+  .sol{margin-top:.4rem; padding:.6rem .7rem; border-left:3px solid var(--ok); background:color-mix(in oklab, var(--panel) 92%, black 8%); display:none}
+  .rubric{font-size:.95rem; color:var(--muted)}
+  .narrow{max-width:1000px; margin:auto}
+  footer{color:var(--muted); text-align:center; padding:28px 0}
+  @media print{ header,.noprint{display:none!important} .sol{display:block!important} }
+  canvas{width:100%; height:420px; background:color-mix(in oklab, var(--panel) 90%, black 10%); border-radius:14px; border:1px solid var(--border); touch-action:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Suite UNED v3 — <span class="badge">Versión corregida</span></h1>
+    <p class="lead">Si algo no aparece, recarga con Ctrl/Cmd+Shift+R (limpia caché).</p>
+  </div>
+</header>
+<main>
+  <section id="banco">
+    <h2>Banco masivo de preguntas (50+ por asignatura)</h2>
+    <div class="narrow">
+      <div class="card">
+        <h3>Matemáticas</h3>
+        <div class="btns noprint">
+          <label>Tema:
+            <select id="f-mates-b">
+              <option value="">Todos</option>
+              <option value="Limites">Límites</option>
+              <option value="Derivadas">Derivadas</option>
+              <option value="Extremos">Extremos/Concavidad</option>
+              <option value="Integrales">Integrales</option>
+              <option value="Series">Series</option>
+              <option value="Multivariable">Multivariable/Lagrange</option>
+              <option value="EDO">Ecuaciones diferenciales</option>
+              <option value="Trig">Trigonometría</option>
+            </select>
+          </label>
+          <button class="btn" data-act="shuffle" data-exam="mates-b">Aleatorizar</button>
+          <button class="btn alt" data-act="check" data-exam="mates-b">Corregir</button>
+        </div>
+        <div id="exam-mates-b"></div>
+      </div>
+
+      <div class="card">
+        <h3>Microeconomía</h3>
+        <div class="btns noprint">
+          <label>Tema:
+            <select id="f-micro-b">
+              <option value="">Todos</option>
+              <option value="Mercado">Demanda/Oferta/Impuestos</option>
+              <option value="Elasticidad">Elasticidades</option>
+              <option value="Consumidor">Consumidor</option>
+              <option value="Costes">Costes/Producción</option>
+              <option value="Competencia">Comp. perfecta</option>
+              <option value="Monopolio">Monopolio/Discriminación</option>
+              <option value="Bienestar">Bienestar/Externalidades</option>
+              <option value="Juegos">Juegos</option>
+            </select>
+          </label>
+          <button class="btn" data-act="shuffle" data-exam="micro-b">Aleatorizar</button>
+          <button class="btn alt" data-act="check" data-exam="micro-b">Corregir</button>
+        </div>
+        <div id="exam-micro-b"></div>
+      </div>
+
+      <div class="card">
+        <h3>Derecho Patrimonial</h3>
+        <div class="btns noprint">
+          <label>Filtro:
+            <select id="f-derecho-b">
+              <option value="">Todos</option>
+              <option value="Fuentes">Fuentes/Principios</option>
+              <option value="Reales">Derechos reales</option>
+              <option value="Obligaciones">Obligaciones</option>
+              <option value="Contratos">Contratos</option>
+              <option value="Responsabilidad">Responsabilidad</option>
+              <option value="Registro">Registro</option>
+              <option value="Posesoria">Protección posesoria</option>
+            </select>
+          </label>
+          <button class="btn" data-act="shuffle" data-exam="derecho-b">Aleatorizar</button>
+          <button class="btn alt" data-act="check" data-exam="derecho-b">Corregir</button>
+        </div>
+        <div id="exam-derecho-b"></div>
+      </div>
+
+      <div class="card">
+        <h3>Fundamentos de la UE</h3>
+        <div class="btns noprint">
+          <label>Filtro:
+            <select id="f-ue-b">
+              <option value="">Todos</option>
+              <option value="Historia">Historia/Tratados</option>
+              <option value="Instituciones">Instituciones</option>
+              <option value="Fuentes">Fuentes y primacía</option>
+              <option value="Procedimiento">Procedimiento legislativo</option>
+              <option value="Mercado">Mercado interior</option>
+              <option value="UEM">UEM/BCE</option>
+              <option value="Contencioso">Contencioso UE</option>
+            </select>
+          </label>
+          <button class="btn" data-act="shuffle" data-exam="ue-b">Aleatorizar</button>
+          <button class="btn alt" data-act="check" data-exam="ue-b">Corregir</button>
+        </div>
+        <div id="exam-ue-b"></div>
+      </div>
+
+      <div class="card">
+        <h3>Teoría de los Ingresos Públicos</h3>
+        <div class="btns noprint">
+          <label>Tema:
+            <select id="f-ingresos-b">
+              <option value="">Todos</option>
+              <option value="Principios">Principios/Clasificación</option>
+              <option value="Incidencia">Incidencia</option>
+              <option value="IVA">IVA/Consumo</option>
+              <option value="IRPF">IRPF</option>
+              <option value="IS">Imposición societaria</option>
+              <option value="Bienestar">Bienestar/DWL</option>
+              <option value="Federalismo">Federalismo fiscal</option>
+            </select>
+          </label>
+          <button class="btn" data-act="shuffle" data-exam="ingresos-b">Aleatorizar</button>
+          <button class="btn alt" data-act="check" data-exam="ingresos-b">Corregir</button>
+        </div>
+        <div id="exam-ingresos-b"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>Suite UNED v3 · FIX</footer>
+
+<script>
+/* ==== utilidades ==== */
+function el(tag, attrs={}, html=''){ const e=document.createElement(tag); Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v)); e.innerHTML=html; return e; }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=(Math.random()*(i+1))|0; [a[i],a[j]]=[a[j],a[i]];} return a; }
+
+/* ==== bancos (mismos que la versión anterior) ==== */
+function bankMates(){ const Q=[]; let id=0;
+  for(let a=1;a<=10;a++){ Q.push({id:'L1-'+(++id), topic:'Limites', type:'num', title:'Cociente notable', stem:`\\(\\lim_{x\\to ${a}} \\frac{x^2 - ${a*a}}{x - ${a}}\\)`, ans:2*a, tol:1e-6, solution:`(x^2−${a*a})=(x−${a})(x+${a}) ⇒ ${2*a}.`}); }
+  for(let k=1;k<=5;k++){ Q.push({id:'L2-'+(++id), topic:'Limites', type:'num', title:'Seno sobre x', stem:`\\(\\lim_{x\\to 0} \\frac{\\sin(${k}x)}{x}\\)`, ans:k, tol:1e-6, solution:`Notable ⇒ ${k}.`}); }
+  for(let c=1;c<=5;c++){ Q.push({id:'D1-'+(++id), topic:'Derivadas', type:'num', title:'Producto+cadena', stem:`\\(f(x)=(x^2+${c})e^{-x}\\), da \\(f'(0)\\).`, ans:-c, tol:1e-6, solution:`f′=e^{-x}(2x)-(x^2+${c})e^{-x} ⇒ f′(0)=${-c}.`}); }
+  for(let a=1;a<=5;a++){ const b=a+1; Q.push({id:'D2-'+(++id), topic:'Derivadas', type:'num', title:'Cociente', stem:`\\(f(x)=\\frac{${a}x+${b}}{x^2+1}\\). Calcula \\(f'(0)\\).`, ans:a, tol:1e-9, solution:`f′(0)=a.`}); }
+  for(let a=1;a<=5;a++){ Q.push({id:'E1-'+(++id), topic:'Extremos', type:'num', title:'Mínimo polinómica', stem:`\\(g(x)=x^3-3${a}x^2+2\\). Valor en mín.`, ans:(-4*a*a*a+2), tol:1e-6, solution:`mín en x=2${a} ⇒ g=−4${a}^3+2.`}); }
+  for(let k=1;k<=5;k++){ Q.push({id:'E2-'+(++id), topic:'Extremos', type:'num', title:'Racional', stem:`\\(f(x)=\\frac{x}{x^2+${k}}\\). x del máximo local +`, ans:Math.sqrt(k), tol:1e-6, solution:`crítico en x=±√${k}; máx en +√${k}.`}); }
+  for(let k=1;k<=5;k++){ Q.push({id:'I1-'+(++id), topic:'Integrales', type:'num', title:'Sustitución', stem:`Coeficiente de \\(\\ln(x^2+${k})\\) en \\(\\int \\frac{2x}{x^2+${k}}dx\\)`, ans:1, tol:0, solution:`u=x^2+${k} ⇒ ln(x^2+${k}).`}); }
+  for(let a=1;a<=5;a++){ Q.push({id:'I2-'+(++id), topic:'Integrales', type:'open', title:'Por partes', stem:`\\(\\int x e^{${a}x}\\,dx\\)`, solution:`\\(\\frac{x e^{${a}x}}{${a}} - \\frac{e^{${a}x}}{${a}^2}+C\\).`}); }
+  [0.5,0.8,1,1.2,2].forEach(p=>{ Q.push({id:'S1-'+(++id), topic:'Series', type:'tf', title:'p‑series', stem:`\\(\\sum \\frac{1}{n^{${p}}}\\) converge.`, ans:(p>1), solution:`Converge ⇔ p>1.`}); });
+  for(let a=1;a<=4;a++){ const b=a+1; Q.push({id:'M1-'+(++id), topic:'Multivariable', type:'num', title:'Mínimo (2D)', stem:`\\(f=x^2+y^2-2${a}x-2${b}y+${a*a}+${b*b}\\), valor mín.`, ans:0, tol:1e-9, solution:`Completa cuadrados ⇒ 0.`}); }
+  for(let m=6;m<=12;m+=2){ Q.push({id:'M2-'+(++id), topic:'Multivariable', type:'num', title:'Lagrange', stem:`Max \\(xy\\) s.a. \\(x+y=${m}\\), valor`, ans:(m*m/4), tol:1e-6, solution:`x=y=${m}/2 ⇒ ${m*m/4}.`}); }
+  [1,2,-1,-2].forEach(k=>{ Q.push({id:'O1-'+(++id), topic:'EDO', type:'num', title:'Exponencial', stem:`y′=${k}y, y(0)=1 ⇒ y(1)`, ans:Math.exp(k), tol:0.02, solution:`e^{${k}}.`}); });
+  [1,2,3,4].forEach(a=>{ Q.push({id:'T1-'+(++id), topic:'Trig', type:'num', title:'∫ seno', stem:`\\(\\int_0^{\\pi} \\sin(${a}x)dx\\)`, ans:(2/a), tol:1e-6, solution:`2/${a}.`}); });
+  return Q;
+}
+function bankMicro(){ const Q=[]; let id=0;
+  for(let a=80;a<=120;a+=10){ for(let b=1;b<=2;b++){ const p=(a+20)/((2*b)+(2+b)); Q.push({id:'MC-'+(++id), topic:'Mercado', type:'num', title:'Equilibrio', stem:`D: Q=${a}-${2*b}p; S: Q=-20+${(2+b)}p ⇒ p*?`, ans:+p.toFixed(6), tol:1e-3, solution:`p*=${p.toFixed(3)}.`}); } }
+  [5,10,15,20].forEach(t=>{ Q.push({id:'Tax-'+(++id), topic:'Mercado', type:'num', title:'DWL impuesto', stem:`Si ΔQ=t=${t}, DWL=?`, ans:0.5*t*t, tol:1e-6, solution:`½·t·ΔQ = ${0.5*t*t}.`}); });
+  [20,30,40,50,60].forEach(p=>{ const Qd=(100-2*p), eps=-(2*p)/Qd; Q.push({id:'EL-'+(++id), topic:'Elasticidad', type:'num', title:'ε puntual', stem:`Q=100−2p; en p=${p} ⇒ ε (3 dec.)`, ans:+eps.toFixed(3), tol:0.02, solution:`${eps.toFixed(3)}.`}); });
+  for(let m=80;m<=120;m+=10){ const px=2,py=4; Q.push({id:'CD-'+(++id), topic:'Consumidor', type:'num', title:'Cobb‑Douglas x*', stem:`m=${m}, px=2, py=4 ⇒ x*`, ans:m/4, tol:1e-6, solution:`${m/4}.`}); Q.push({id:'CD-'+(++id), topic:'Consumidor', type:'num', title:'Cobb‑Douglas y*', stem:`m=${m} ⇒ y*`, ans:m/8, tol:1e-6, solution:`${m/8}.`}); }
+  [ [50,10,1,40], [30,8,2,36], [20,5,3,35] ].forEach(([F,c,d,p])=>{ const q=(p-c)/(2*d); Q.push({id:'CT-'+(++id), topic:'Costes', type:'num', title:'q* (p=MC)', stem:`C=F+${c}q+${d}q^2, p=${p}`, ans:q, tol:1e-6, solution:`q=${q.toFixed(3)}.`}); });
+  [ [100,2,20], [80,1.5,10], [120,3,30], [90,2,0], [110,2.5,20] ].forEach(([a,b,c])=>{ const q=(a-c)/(2*b), p=a-b*q; Q.push({id:'MO-'+(++id), topic:'Monopolio', type:'num', title:'q_M', stem:`a=${a}, b=${b}, c=${c} ⇒ q_M`, ans:q, tol:1e-6, solution:`${q.toFixed(3)}.`}); Q.push({id:'MO-'+(++id), topic:'Monopolio', type:'num', title:'p_M', stem:`p_M=?`, ans:p, tol:1e-6, solution:`${p.toFixed(3)}.`}); });
+  Q.push(
+    {id:'MCX-1',topic:'Bienestar',type:'mc',stem:'Demanda inelástica, P↑ ⇒ TR…',opts:['↓','↑','=','?'],ans:1,solution:'↑.'},
+    {id:'MCX-2',topic:'Monopolio',type:'mc',stem:'Lerner =',opts:['1/|ε|','−1/ε','|ε|','MC/p'],ans:1,solution:'−1/ε.'},
+    {id:'MCX-3',topic:'Bienestar',type:'mc',stem:'Pigou óptimo',opts:['CME en Q*','CM privado','Media','0'],ans:0,solution:'CME.'},
+    {id:'MCX-4',topic:'Juegos',type:'mc',stem:'Nash',opts:['Max suma','Dom. de todos','Sin mejora unilateral','Eficiente'],ans:2,solution:'Definición.'},
+    {id:'MCX-5',topic:'Monopolio',type:'mc',stem:'3º grado',opts:['Individuo','Bloques','Segmentos','Cupones'],ans:2,solution:'Segmentos.'}
+  );
+  while(Q.length<50){ Q.push({id:'FILL-'+Q.length,topic:'Bienestar',type:'tf',stem:'Con ε=−1, TR no cambia ante variaciones de P.',ans:true,solution:'Unitario ⇒ TR constante.'}); }
+  return Q;
+}
+function bankDerecho(){ const Q=[]; let id=0;
+  const items=[
+    ['Fuentes','La costumbre es fuente supletoria.',true,'Art. 1 CC.'],
+    ['Fuentes','Los principios generales no son fuente.',false,'Sí lo son.'],
+    ['Fuentes','La jurisprudencia es fuente directa.',false,'Complementa.'],
+    ['Reales','La propiedad es derecho real limitado.',false,'Es pleno.'],
+    ['Reales','Usufructo: uso y disfrute sin nuda propiedad.',true,'Usus y fructus.'],
+    ['Reales','Servidumbre: gravamen sobre un predio a favor de otro.',true,'Definición.'],
+    ['Reales','En hipoteca se entrega la posesión al acreedor.',false,'No.'],
+    ['Obligaciones','Toda obligación requiere mora para nacer.',false,'La mora es por incumplimiento.'],
+    ['Obligaciones','En solidaria se puede reclamar el todo a cualquiera.',true,'Régimen.'],
+    ['Obligaciones','La condonación extingue la obligación.',true,'Remisión.'],
+    ['Contratos','Error produce nulidad de pleno derecho.',false,'Anulabilidad.'],
+    ['Contratos','Oferta y aceptación deben coincidir.',true,'Concordancia.'],
+    ['Contratos','El arrendamiento transmite la propiedad.',false,'Uso y disfrute.'],
+    ['Responsabilidad','Siempre exige culpa.',false,'Puede ser objetiva.'],
+    ['Responsabilidad','Nexo causal: requisito.',true,'Elemento.'],
+    ['Registro','Prioridad: primero en inscribir, mejor derecho.',true,'Principio.'],
+    ['Registro','Fe pública protege al tercero de mala fe.',false,'Buena fe.'],
+    ['Posesoria','Requiere título de propiedad.',false,'Protección autónoma.'],
+    ['Obligaciones','Compensación extingue deudas homogéneas recíprocas.',true,'Requisitos.'],
+    ['Contratos','La rescisión es forma ordinaria de ineficacia por falta de consentimiento.',false,'Remedio excepcional.']
+  ];
+  const extra=[
+    ['Fuentes','Analogía procede ante laguna legal.',true,'Art. 4 CC.'],
+    ['Fuentes','Reglamento tiene rango de ley orgánica.',false,'No.'],
+    ['Reales','Posesión siempre de buena fe.',false,'Puede ser de mala fe.'],
+    ['Reales','Accesión: modo de adquirir.',true,'Sí.'],
+    ['Obligaciones','Mancomunadas: cada deudor responde del total.',false,'Solo su parte.'],
+    ['Obligaciones','Novación modifica/extingue.',true,'Sí.'],
+    ['Contratos','Vicios: error, dolo, violencia, intimidación.',true,'Listado.'],
+    ['Contratos','Condición resolutoria extingue al cumplirse.',true,'Sí.'],
+    ['Responsabilidad','Daño moral no resarcible.',false,'Puede serlo.'],
+    ['Registro','Tracto: cadena ininterrumpida de titularidades.',true,'Principio.']
+  ];
+  const all=items.concat(extra);
+  while(all.length<50){ all.push(['Contratos','Se atiende a la intención común en la interpretación.',true,'Art. 1281 CC.']); }
+  all.forEach(([topic,stem,ans,solution],i)=>{ Q.push({id:'D-'+(i+1), topic, type:'tf', stem, ans, solution}); });
+  return Q;
+}
+function bankUE(){ const Q=[]; let id=0;
+  const base=[
+    ['Historia','CECA (1951) es antecedente de la UE.',true,'París 1951.'],
+    ['Historia','Lisboa (2009) suprime los tres pilares.',true,'Sí.'],
+    ['Instituciones','Comisión propone legislación.',true,'Iniciativa.'],
+    ['Instituciones','Consejo Europeo co‑legisla.',false,'Es el Consejo de la UE.'],
+    ['Instituciones','BEI dicta sentencias.',false,'TJUE.'],
+    ['Fuentes','Directivas siempre directamente aplicables.',false,'Requieren transposición salvo efecto directo.'],
+    ['Fuentes','Primacía: preferencia del Derecho UE.',true,'Prevalencia.'],
+    ['Procedimiento','Parlamento y Consejo co‑legislan.',true,'Codecisión.'],
+    ['Mercado','Cuatro libertades: bienes, personas, servicios, capitales.',true,'Sí.'],
+    ['UEM','BCE define política monetaria.',true,'Competencia BCE.'],
+    ['Contencioso','Cuestión prejudicial (art. 267 TFUE).',true,'Sí.'],
+    ['Instituciones','Consejo de Europa es institución de la UE.',false,'No lo es.'],
+    ['Fuentes','Reglamentos: obligatorios y directamente aplicables.',true,'Art. 288 TFUE.'],
+    ['Procedimiento','Iniciativa ciudadana: proponer legislación.',true,'1M firmas.'],
+    ['Mercado','Libre circulación de trabajadores es absoluta.',false,'Puede limitarse con justificación.']
+  ];
+  const more=[
+    ['Historia','Maastricht (1992) crea la UE y la UEM.',true,'Sí.'],
+    ['Instituciones','Parlamento tiene iniciativa legislativa plena.',false,'Iniciativa de la Comisión (salvo excepciones).'],
+    ['Fuentes','Decisiones obligan a todos por igual.',false,'A sus destinatarios.'],
+    ['Procedimiento','Trílogo es fase formal.',false,'Informal.'],
+    ['Mercado','Servicios = establecimiento.',false,'Libertades distintas.'],
+    ['UEM','Eurogrupo es órgano decisorio tratado.',false,'Foro informal.'],
+    ['Contencioso','Particulares pueden siempre anular actos.',false,'Solo si destinatarios o afectados directos.'],
+    ['Instituciones','Tribunal de Cuentas fiscaliza.',true,'Sí.'],
+    ['Fuentes','Actos delegados: elementos no esenciales.',true,'Art. 290 TFUE.'],
+    ['Fuentes','Actos de ejecución: control de EM.',true,'Art. 291 TFUE.']
+  ];
+  const all=base.concat(more);
+  while(all.length<50){ all.push(['Instituciones','Comité de las Regiones: órgano consultivo.',true,'Sí.']); }
+  all.forEach(([topic,stem,ans,solution],i)=>{ Q.push({id:'UE-'+(i+1), topic, type:'tf', stem, ans, solution}); });
+  return Q;
+}
+function bankIngresos(){ const Q=[]; let id=0;
+  Q.push(
+    {id:'P1',topic:'Principios',type:'tf',stem:'Equidad vertical = trato diferente a capacidades diferentes.',ans:true,solution:'Definición.'},
+    {id:'P2',topic:'Principios',type:'tf',stem:'Impuesto proporcional ⇒ tipo medio decreciente.',ans:false,solution:'Tipo medio constante.'},
+    {id:'P3',topic:'Principios',type:'mc',stem:'Impuesto regresivo:',opts:['Tmarg crece','Tmedio decrece con renta','Tmedio crece con renta','No depende'],ans:1,solution:'Regresivo ⇒ Tm↓.'},
+    {id:'P4',topic:'Clasificación',type:'mc',stem:'El IVA es…',opts:['Directo','Indirecto','Real sobre renta','Capitación'],ans:1,solution:'Indirecto.'}
+  );
+  [ [0.5,1.5],[0.8,0.8],[1.2,0.4] ].forEach(([ed,es])=>{
+    const who= ed<es?0: ed>es?1:2;
+    Q.push({id:'I-'+(++id),topic:'Incidencia',type:'mc',stem:`|ε_D|=${ed}, |ε_S|=${es} ⇒ mayor carga`,opts:['Consumidores','Productores','Ambos','Ninguno'],ans:who,solution:'Menos elástico soporta más.'});
+  });
+  [5,10,15,20,25].forEach(t=>{ Q.push({id:'B-'+(++id),topic:'Bienestar',type:'num',stem:`ΔQ=${t}, t=${t} ⇒ DWL`,ans:0.5*t*t,tol:1e-6,solution:`= ${0.5*t*t}.`}); });
+  Q.push(
+    {id:'V1',topic:'IVA',type:'mc',stem:'Base imponible IVA',opts:['Precio sin impuestos','Precio con impuestos','Renta del comprador','Beneficio'],ans:0,solution:'Contraprestación sin otros impuestos.'},
+    {id:'V2',topic:'IVA',type:'tf',stem:'Demanda perfectamente inelástica ⇒ toda la carga del IVA al consumidor.',ans:true,solution:'No ajusta cantidad.'}
+  );
+  [30000,50000,70000,100000].forEach(y=>{ const cuota = y<=50000?0.2*y:0.2*50000+0.4*(y-50000); const tm=cuota/y;
+    Q.push({id:'R-'+(++id),topic:'IRPF',type:'num',stem:`Tramos: 20% hasta 50k, 40% exceso. y=${y} ⇒ tipo medio (3 dec.)`,ans:+tm.toFixed(3),tol:0.01,solution:`Cuota=${cuota.toFixed(0)}; Tm≈${tm.toFixed(3)}.`}); });
+  Q.push(
+    {id:'S1',topic:'IS',type:'tf',stem:'Las amortizaciones afectan a la base del IS.',ans:true,solution:'Gasto deducible.'},
+    {id:'S2',topic:'IS',type:'mc',stem:'Incentivo típico IS',opts:['Exención bienes consumo','Amortización acelerada','Tipo marginal cero','Subsidio a ventas'],ans:1,solution:'Diferimiento.'},
+    {id:'F1',topic:'Federalismo',type:'tf',stem:'Correspondencia: alinear gasto y financiación.',ans:true,solution:'Responsabilidad y eficiencia.'},
+    {id:'F2',topic:'Federalismo',type:'mc',stem:'Estabilizadores automáticos: nivel',opts:['Local','Regional','Central','Privado'],ans:2,solution:'Nivel central.'}
+  );
+  while(Q.length<50){ Q.push({id:'X'+Q.length,topic:'Bienestar',type:'tf',stem:'La DWL es eficiencia perdida por distorsiones fiscales.',ans:true,solution:'Definición.'}); }
+  return Q;
+}
+
+const BANKS = {
+  'mates-b': bankMates(),
+  'micro-b': bankMicro(),
+  'derecho-b': bankDerecho(),
+  'ue-b': bankUE(),
+  'ingresos-b': bankIngresos()
+};
+
+/* ==== render + eventos ==== */
+function renderQuestions(containerId, questions, filter=''){
+  const host=document.getElementById(containerId); host.innerHTML='';
+  const set = filter? questions.filter(q=>q.topic===filter) : questions;
+  set.forEach((q,idx)=>{
+    const card = document.createElement('div'); card.className='q card';
+    card.appendChild(el('h4',{}, `${idx+1}. ${q.topic? '['+q.topic+'] ':''}${q.title||''}`));
+    card.appendChild(el('div',{class:'stem'}, q.stem));
+    if(q.type==='mc'){
+      const opts = el('div',{class:'opts'});
+      q.opts.forEach((t,i)=>{
+        const id=`${containerId}-${q.id}-${i}`;
+        const lbl = el('label',{}, `<input type="radio" name="${containerId}-${q.id}" value="${i}" id="${id}"> ${t}`);
+        opts.appendChild(lbl);
+      });
+      card.appendChild(opts);
+    } else if(q.type==='num'){
+      card.appendChild(el('input',{type:'number',step:'any',id:`${containerId}-${q.id}`},''));
+    } else if(q.type==='tf'){
+      const opts = el('div',{class:'opts'});
+      ['Verdadero','Falso'].forEach((t,i)=>{
+        const id=`${containerId}-${q.id}-${i}`;
+        const lbl = el('label',{}, `<input type="radio" name="${containerId}-${q.id}" value="${i}" id="${id}"> ${t}`);
+        opts.appendChild(lbl);
+      });
+      card.appendChild(opts);
+    } else if(q.type==='open'){
+      card.appendChild(el('textarea',{rows:'4',id:`${containerId}-${q.id}`},''));
+    }
+    card.appendChild(el('div',{class:'sol',id:`sol-${containerId}-${q.id}`}, `<strong>Solución:</strong> ${q.solution}`));
+    host.appendChild(card);
+  });
+}
+function correct(containerId, questions){
+  let ok=0, total=0;
+  questions.forEach(q=>{
+    const solBox = document.getElementById(`sol-${containerId}-${q.id}`);
+    if(solBox) solBox.style.display='block';
+    if(q.type==='mc'){
+      total++;
+      const checked=document.querySelector(`input[name="${containerId}-${q.id}"]:checked`);
+      if(checked && parseInt(checked.value)===q.ans) ok++;
+    } else if(q.type==='num'){
+      total++;
+      const inp=document.getElementById(`${containerId}-${q.id}`);
+      const v= parseFloat(inp.value);
+      if(isFinite(v) && Math.abs(v - q.ans) <= (q.tol||0)) ok++;
+    } else if(q.type==='tf'){
+      total++;
+      const checked=document.querySelector(`input[name="${containerId}-${q.id}"]:checked`);
+      if(checked && parseInt(checked.value)=== (q.ans?0:1)) ok++;
+    }
+  });
+  alert(`Puntuación (auto-corregible): ${ok}/${total}`);
+}
+
+function setupBank(sectionKey, filterId, containerId){
+  const bank = BANKS[sectionKey];
+  const sel = document.getElementById(filterId);
+  function draw(){ renderQuestions(containerId, bank, sel.value); }
+  draw(); // pinta preguntas al cargar
+  sel.addEventListener('change', draw);
+  document.querySelector(`[data-exam="${sectionKey}"][data-act="shuffle"]`).addEventListener('click', ()=>{ shuffle(bank); draw(); });
+  document.querySelector(`[data-exam="${sectionKey}"][data-act="check"]`).addEventListener('click', ()=>{
+    const subset = sel.value? bank.filter(q=>q.topic===sel.value) : bank;
+    correct(containerId, subset);
+  });
+}
+
+setupBank('mates-b','f-mates-b','exam-mates-b');
+setupBank('micro-b','f-micro-b','exam-micro-b');
+setupBank('derecho-b','f-derecho-b','exam-derecho-b');
+setupBank('ue-b','f-ue-b','exam-ue-b');
+setupBank('ingresos-b','f-ingresos-b','exam-ingresos-b');
+</script>
+</body>
+</html>

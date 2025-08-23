@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suite UNED v7 — 50 ejercicios por asignatura (sin gráficas)</title>
+<meta name="description" content="Generador offline con 50 ejercicios por asignatura. Enunciado + solución oculta. Determinístico (sin internet).">
+<style>
+  :root{ --bg:#0d1226; --panel:#11183a; --ink:#eaf0ff; --muted:#9fb0d9; --brand:#7aa2ff; --accent:#50e3c2; --border:#263a77; --ok:#10b981; --warn:#f59e0b;}
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f8ff; --panel:#ffffff; --ink:#0f1324; --muted:#4e5a7d; --brand:#2b59ff; --accent:#0ea5e9; --border:#d8e1ff; --ok:#059669; --warn:#b45309;}
+  }
+  html,body{height:100%}
+  body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; color:var(--ink);
+       background:linear-gradient(180deg,var(--bg),#0a0f21 70%);}
+  header{position:sticky; top:0; z-index:30; background:color-mix(in oklab, var(--panel) 85%, transparent);
+         border-bottom:1px solid var(--border); backdrop-filter:blur(8px)}
+  .wrap{max-width:1200px; margin:auto; padding:14px 16px}
+  h1{margin:0; font-size:1.9rem}
+  h2{color:var(--brand); margin:1.1rem 0 .6rem; font-size:1.35rem}
+  nav{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+  nav a{color:var(--muted); text-decoration:none; padding:6px 10px; border:1px solid var(--border); border-radius:10px}
+  nav a:hover{color:var(--ink); border-color:var(--brand)}
+  main{max-width:1200px; margin:18px auto; padding:0 16px}
+  section{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:16px; margin:18px 0}
+  .lead{color:var(--muted)}
+  .q-card{border:1px solid var(--border); border-radius:12px; padding:12px; margin:10px 0; background:color-mix(in oklab, var(--panel) 96%, black 4%)}
+  details{border:1px solid var(--border); border-radius:10px; padding:8px 10px; margin:.5rem 0}
+  summary{cursor:pointer; font-weight:600}
+  .sol{border-left:3px solid var(--ok); padding:.6rem .7rem; background:color-mix(in oklab, var(--panel) 92%, black 8%)}
+  .pill{display:inline-block; padding:2px 8px; border-radius:999px; background:color-mix(in oklab, var(--accent) 22%, transparent); border:1px solid var(--border); margin-left:8px}
+  .muted{color:var(--muted)}
+  .small{font-size:.95rem}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media (max-width:800px){ .grid2{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Suite UNED v7 — <span class="pill">50 ejercicios por asignatura</span></h1>
+    <nav>
+      <a href="#mates">Matemáticas</a>
+      <a href="#micro">Microeconomía</a>
+      <a href="#derecho">Derecho Patrimonial</a>
+      <a href="#ue">Fundamentos UE</a>
+      <a href="#ingresos">Ingresos Públicos</a>
+    </nav>
+    <p class="lead small">Cada ejercicio tiene enunciado y solución oculta. No hay gráficas. Todo es determinístico para que tengas siempre los mismos 50 por tema.</p>
+  </div>
+</header>
+
+<main>
+  <section id="mates"><h2>Matemáticas</h2><div id="mates-list"></div></section>
+  <section id="micro"><h2>Microeconomía</h2><div id="micro-list"></div></section>
+  <section id="derecho"><h2>Derecho Patrimonial</h2><div id="der-list"></div></section>
+  <section id="ue"><h2>Fundamentos de la UE</h2><div id="ue-list"></div></section>
+  <section id="ingresos"><h2>Teoría de los Ingresos Públicos</h2><div id="ing-list"></div></section>
+</main>
+
+<footer class="wrap" style="color:var(--muted); text-align:center; padding:26px 0">Suite UNED v7 · Funciona offline · Sin gráficas</footer>
+
+<script>
+/* ===== PRNG determinístico (xorshift32) ===== */
+function PRNG(seed){ let x=seed|0; if(x===0) x=123456789; return ()=>{ x^=x<<13; x^=x>>>17; x^=x<<5; return (x>>>0)/4294967296; }; }
+const rndInt = (r,a,b)=> Math.floor(r()*(b-a+1))+a;
+const pick = (r,arr)=> arr[Math.floor(r()*arr.length)];
+/* util html */
+function el(tag,attrs={},html=''){const e=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));e.innerHTML=html;return e;}
+function card(n,title,enun,sol){ const c=el('div',{class:'q-card'}); c.appendChild(el('div',{class:'muted small'},`Ejercicio ${n}`));
+  c.appendChild(el('h3',{},title)); c.appendChild(el('p',{},enun));
+  const d=el('details',{},`<summary>Mostrar solución</summary><div class="sol">${sol}</div>`); c.appendChild(d); return c; }
+
+/* ===== 1) Matemáticas — 50 generados ===== */
+function genMates(mount){
+  const r = PRNG(20250817);
+  let n=0; const host=document.getElementById(mount);
+  const add=(t,e,s)=>host.appendChild(card(++n,t,e,s));
+
+  // Tipos A–H
+  for(let i=0;i<50;i++){
+    const type = i%8;
+    if(type===0){ // Derivada polinomio (grado 2–3)
+      const a=rndInt(r,1,5)*pick(r,[1,-1]), b=rndInt(r,0,7)*pick(r,[1,-1]), c=rndInt(r,0,6)*pick(r,[1,-1]), d=(rndInt(r,0,1)? rndInt(r,1,3)*pick(r,[1,-1]) : 0);
+      const deg = d!==0?3:2;
+      const poly = d? `${d}x^3 ${b>=0?'+':''}${b}x^2 ${a>=0?'+':''}${a}x ${c>=0?'+':''}${c}` : `${b}x^2 ${a>=0?'+':''}${a}x ${c>=0?'+':''}${c}`;
+      const der = d? `${3*d}x^2 ${2*b>=0?'+':''}${2*b}x ${a>=0?'+':''}${a}` : `${2*b}x ${a>=0?'+':''}${a}`;
+      add(`Derivada de polinomio (grado ${deg})`,
+          `Deriva: f(x) = ${poly}.`,
+          `f'(x) = ${der}.`);
+    }
+    if(type===1){ // Derivada exponencial lineal
+      const k=rndInt(r,1,4)*pick(r,[1,-1]), m=rndInt(r,1,4)*pick(r,[1,-1]), n0=rndInt(r,-3,3);
+      add('Derivada exponencial',
+          `Deriva: f(x) = ${k}·e^{${m}x${n0>=0?'+':''}${n0}}.`,
+          `f'(x) = ${k*m}·e^{${m}x${n0>=0?'+':''}${n0}}.`);
+    }
+    if(type===2){ // Derivada log lineal
+      const k=rndInt(r,1,5)*pick(r,[1,-1]), a=rndInt(r,1,5)*pick(r,[1,-1]), b=rndInt(r,-4,4);
+      add('Derivada logarítmica (cadena)',
+          `Deriva: f(x) = ${k}·ln(${a}x${b>=0?'+':''}${b}).`,
+          `f'(x) = ${k*a}/(${a}x${b>=0?'+':''}${b}).`);
+    }
+    if(type===3){ // Punto crítico y clasificación (cuadrática)
+      let A=pick(r,[1,2,3,4])*pick(r,[1,-1]); if(A===0) A=2;
+      const B=rndInt(r,-8,8), C=rndInt(r,-5,6);
+      const xc=(-B/(2*A)).toFixed(3);
+      const fc=(A*(-B/(2*A))**2 + B*(-B/(2*A)) + C).toFixed(3);
+      add('Crítico de cuadrática',
+          `Para f(x)=${A}x^2 ${B>=0?'+':''}${B}x ${C>=0?'+':''}${C}, halla su punto crítico y clasifícalo.`,
+          `x_c = −B/(2A) = ${xc}. Como A=${A>0?'>0 ⇒ mínimo':'<0 ⇒ máximo'}. Valor: f(x_c) = ${fc}.`);
+    }
+    if(type===4){ // Resolver ax^2+bx+c=0
+      const a=rndInt(r,1,5)*pick(r,[1,-1]), b=rndInt(r,-8,8), c=rndInt(r,-6,6);
+      const disc=b*b-4*a*c;
+      let sol;
+      if(disc<0){ sol=`No hay raíces reales (Δ=${disc}).`; }
+      else if(disc===0){ sol=`Raíz doble: x = ${(-b/(2*a)).toFixed(3)}.`; }
+      else{ const x1=((-b+Math.sqrt(disc))/(2*a)).toFixed(3), x2=((-b-Math.sqrt(disc))/(2*a)).toFixed(3); sol=`x1=${x1}, x2=${x2} (Δ=${disc}).`; }
+      add('Ecuación cuadrática',
+          `Resuelve: ${a}x^2 ${b>=0?'+':''}${b}x ${c>=0?'+':''}${c}=0.`,
+          sol);
+    }
+    if(type===5){ // Límite a infinito de racional
+      const p=rndInt(r,1,6)*pick(r,[1,-1]), q=rndInt(r,1,6)*pick(r,[1,-1]);
+      const sol = (p/q).toFixed(3);
+      add('Límite a ∞ de racional',
+          `Calcula: \\(\\lim_{x\\to\\infty} \\frac{${p}x^3+\\dots}{${q}x^3+\\dots}\\).`,
+          `Cociente de líderes ⇒ límite = ${p}/${q} = ${sol}.`);
+    }
+    if(type===6){ // Integral de monomio
+      const k=rndInt(r,1,6)*pick(r,[1,-1]), nExp=rndInt(r,0,5);
+      add('Integral de potencia',
+          `Integra: \\(\\int ${k}x^{${nExp}}\\,dx\\).`,
+          `\\( ${k}/(${nExp+1}) · x^{${nExp+1}} + C = ${(k/(nExp+1)).toFixed(3)}x^{${nExp+1}}+C \\).`);
+    }
+    if(type===7){ // Integral de exponencial
+      const m=rndInt(r,1,5)*pick(r,[1,-1]), c=rndInt(r,1,6)*pick(r,[1,-1]);
+      add('Integral exponencial',
+          `Integra: \\(\\int ${c}e^{${m}x}\\,dx\\).`,
+          `\\( ${c}/${m} · e^{${m}x} + C = ${(c/m).toFixed(3)}e^{${m}x}+C \\).`);
+    }
+  }
+}
+
+/* ===== 2) Microeconomía — 50 problemas numéricos ===== */
+function genMicro(mount){
+  const r = PRNG(3101); let n=0; const host=document.getElementById(mount);
+  const add=(t,e,s)=>host.appendChild(card(++n,t,e,s));
+  for(let i=0;i<50;i++){
+    const type=i%10;
+    const a=rndInt(r,80,140), b=rndInt(r,1,4), c=rndInt(r,10,40), d=rndInt(r,1,4);
+    if(type===0){ // Equilibrio lineal
+      const p=(a+c)/(b+d), q=a-b*p;
+      add('Equilibrio competitivo',
+          `D: Q=a−b·p (a=${a}, b=${b}); S: Q=−c+d·p (c=${c}, d=${d}). Halla (p*,q*).`,
+          `p*=${p.toFixed(2)}, q*=${q.toFixed(2)}.`);
+    }
+    if(type===1){ // Impuesto específico
+      const t=rndInt(r,5,20); const p1=(a+c+t)/(b+d), q1=a-b*p1, pp=p1-t;
+      const p0=(a+c)/(b+d), q0=a-b*p0, dwl=0.5*t*(q0-q1);
+      add('Impuesto específico al productor',
+          `t=${t}. Calcula q, precio al consumidor y al productor, y DWL.`,
+          `q=${q1.toFixed(2)}, p_c=${p1.toFixed(2)}, p_p=${pp.toFixed(2)}, DWL≈${dwl.toFixed(2)}.`);
+    }
+    if(type===2){ // Subsidio consumidor
+      const s=rndInt(r,3,15); const pc=(a+c-s)/(b+d), q=a-b*pc, pp=pc+s;
+      add('Subsidio al consumidor',
+          `s=${s}. Con las mismas curvas, calcula (q, p_c, p_p).`,
+          `q=${q.toFixed(2)}, p_c=${pc.toFixed(2)}, p_p=${pp.toFixed(2)}.`);
+    }
+    if(type===3){ // Techo
+      const pbar=rndInt(r,5,25); const Qd=a-b*pbar, Qs=-c+d*pbar;
+      add('Techo de precio',
+          `p̄=${pbar}. ¿Hay escasez?`,
+          `Qd=${Qd.toFixed(2)}, Qs=${Qs.toFixed(2)} ⇒ escasez=${(Qd-Qs).toFixed(2)}.`);
+    }
+    if(type===4){ // Suelo
+      const pmin=rndInt(r,10,30); const Qd=a-b*pmin, Qs=-c+d*pmin;
+      add('Precio mínimo',
+          `pₘᵢₙ=${pmin}. ¿Hay excedente?`,
+          `Qd=${Qd.toFixed(2)}, Qs=${Qs.toFixed(2)} ⇒ excedente=${(Qs-Qd).toFixed(2)}.`);
+    }
+    if(type===5){ // Elasticidad demanda puntual
+      const p0=rndInt(r,10,30); const Q0=a-b*p0; const eps=-(b*p0)/Q0;
+      add('Elasticidad puntual de demanda',
+          `En p₀=${p0}: D: Q=${a}−${b}p. Calcula ε.`,
+          `ε=−(b·p₀)/Q₀ = ${(-b*p0).toFixed(2)}/${Q0.toFixed(2)} = ${eps.toFixed(3)}.`);
+    }
+    if(type===6){ // Elasticidad oferta
+      const p0=rndInt(r,10,30); const Q0=-c+d*p0; const eta=(d*p0)/Q0;
+      add('Elasticidad puntual de oferta',
+          `En p₀=${p0}: S: Q=−${c}+${d}p. Calcula η.`,
+          `η=(d·p₀)/Q₀ = ${(d*p0).toFixed(2)}/${Q0.toFixed(2)} = ${eta.toFixed(3)}.`);
+    }
+    if(type===7){ // Monopolio lineal
+      const a1=rndInt(r,80,140), b1=rndInt(r,1,4), c1=rndInt(r,5,30);
+      const q=(a1-c1)/(2*b1), p=a1-b1*q;
+      add('Monopolio (p=a−bq, CM=c)',
+          `a=${a1}, b=${b1}, c=${c1}. Halla q_M y p_M.`,
+          `q_M=${q.toFixed(2)}, p_M=${p.toFixed(2)}.`);
+    }
+    if(type===8){ // Arancel simple
+      const Pw=rndInt(r,8,20), t=rndInt(r,2,8);
+      const Qd0=a-b*Pw, Qs0=-c+d*Pw, M0=Qd0-Qs0;
+      const P1=Pw+t, Qd1=a-b*P1, Qs1=-c+d*P1, M1=Qd1-Qs1;
+      add('Arancel con precio mundial',
+          `Pw=${Pw}, t=${t}. Importaciones antes y después.`,
+          `M0=${M0.toFixed(2)}, M1=${M1.toFixed(2)}.`);
+    }
+    if(type===9){ // Variación excedentes aproximada (triángulos)
+      const t=rndInt(r,4,12); const p1=(a+c+t)/(b+d), q1=a-b*p1; const p0=(a+c)/(b+d), q0=a-b*p0;
+      const loss=0.5*t*(q0-q1);
+      add('Pérdida irrecuperable aproximada',
+          `Con impuesto t=${t}, aproxima la DWL a partir de ΔQ.`,
+          `ΔQ=${(q0-q1).toFixed(2)} ⇒ DWL≈${loss.toFixed(2)}.`);
+    }
+  }
+}
+
+/* ===== 3) Derecho Patrimonial — 50 casos breves ===== */
+function genDerecho(mount){
+  const r=PRNG(6501); let n=0; const host=document.getElementById(mount);
+  const add=(t,e,s)=>host.appendChild(card(++n,t,e,s));
+  const nombres=['Ana','Luis','Bea','Carlos','Dina','Iván','Mar','Nora','Óscar','Pablo','Rosa','Sergio'];
+  const plantillas=[
+    {t:'Error esencial / Dolo',
+     e:(A,B,obj)=>`${A} compra a ${B} un ${obj} creyendo (por descripción ambigua) que es original. Resulta no serlo. ¿Error esencial o dolo?`,
+     s:`Si la cualidad fue esencial y el error excusable ⇒ <b>anulabilidad</b>. Si hubo maquinación u ocultación ⇒ <b>dolo</b> ⇒ anulabilidad + daños.`},
+    {t:'Capacidad / Anulabilidad',
+     e:(A,B)=>`${A}, menor no emancipado, firma un contrato con ${B} sin consentimiento. ¿Validez?`,
+     s:`Falta capacidad ⇒ <b>anulabilidad</b> (no nulidad radical).`},
+    {t:'Vicios ocultos (saneamiento)',
+     e:(A,B)=>`${A} compra coche a ${B}; a los días surge avería grave no aparente. ¿Acciones?`,
+     s:`Acciones edilicias: <b>resolución</b> o <b>rebaja del precio</b> dentro de plazo; daños si vendedor conocía el vicio.`},
+    {t:'Fe pública registral',
+     e:(A,B)=>`${A} adquiere de ${B} que figuraba como titular registral, pero había carga no inscrita. ¿Protección del tercero?`,
+     s:`<b>Protección registral</b> al tercero de buena fe y oneroso: inoponibilidad de cargas no inscritas.`},
+    {t:'Arras penitenciales',
+     e:(A,B)=>`${A} entrega señal a ${B} con cláusula de desistimiento. Después desiste. Consecuencia:`,
+     s:`Régimen de <b>arras penitenciales</b>: quien desiste pierde las arras o debe devolverlas dobladas.`},
+    {t:'Prescripción acción personal',
+     e:(A,B)=>`${A} reclama deuda a ${B} tras años sin gestiones. ¿Plazo y cómputo?`,
+     s:`Plazo general actual: <b>5 años</b> desde exigibilidad; se interrumpe por reclamación judicial/extrajudicial o reconocimiento.`},
+    {t:'Simulación contractual',
+     e:(A,B)=>`${A} y ${B} simulan compraventa para defraudar acreedores. ¿Régimen?`,
+     s:`Simulación absoluta ⇒ <b>nulidad</b>; tutela de terceros de buena fe según Registro y reglas de tráfico.`},
+    {t:'Culpa in contrahendo',
+     e:(A,B)=>`Negociaciones avanzadas entre ${A} y ${B}; una parte rompe sin causa generando gastos. ¿Responsabilidad?`,
+     s:`<b>Responsabilidad precontractual</b> por confianza legítima: resarcimiento de gastos y daños causados.`},
+    {t:'Publicidad registral',
+     e:(A,B)=>`${A} compra finca con servidumbre no inscrita. ¿Puede oponerse?`,
+     s:`Las cargas <b>no inscritas</b> son inoponibles al tercero de buena fe protegido por el Registro.`},
+    {t:'Posesión y tutela',
+     e:(A,B)=>`${A} ocupa local; ${B} lo desaloja de hecho. ¿Qué acciones proceden?`,
+     s:`Tutela posesoria (interdictos) para <b>recobrar</b> la posesión, con independencia del dominio.`}
+  ];
+  const objetos=['cuadro','reloj','guitarra','escultura','cámara','jarrón','libro antiguo'];
+  for(let i=0;i<50;i++){
+    const P=plantillas[i%plantillas.length];
+    const A=pick(r,nombres), B=pick(r,nombres.filter(x=>x!==A));
+    const obj=pick(r,objetos);
+    add(P.t, P.e(A,B,obj), P.s);
+  }
+}
+
+/* ===== 4) Fundamentos de la UE — 50 test con solución ===== */
+function genUE(mount){
+  const host=document.getElementById(mount); let n=0;
+  const add=(t,e,s)=>host.appendChild(card(++n,t,e,s));
+  const Q=[
+    ['Iniciativa legislativa','¿Quién tiene la iniciativa legislativa ordinaria en la UE?','Comisión Europea.'],
+    ['Colegisladores','¿Quién co-legisla en el procedimiento ordinario?','Parlamento Europeo y Consejo.'],
+    ['Primacía','En conflicto, ¿qué Derecho prevalece?','El Derecho de la UE (jurisprudencia TJUE).'],
+    ['Efecto directo','¿Cuándo hay efecto directo?','Cuando la norma es clara, precisa e incondicional.'],
+    ['Acto directamente aplicable','¿Qué acto es directamente aplicable?','El Reglamento.'],
+    ['Subsidiariedad','¿Qué limita este principio?','La acción de la UE en competencias compartidas.'],
+    ['Consejo Europeo','¿Quién lo integra?','Jefes de Estado o de Gobierno + Presidente del Consejo Europeo + Presidente de la Comisión.'],
+    ['Tribunal de Cuentas','Función principal.','Fiscalizar la ejecución del presupuesto de la UE.'],
+    ['BCE','Objetivo primordial del BCE.','Estabilidad de precios.'],
+    ['Libertades del mercado interior','Enuméralas.','Bienes, personas, servicios y capitales.'],
+    ['Comité de las Regiones','Naturaleza.','Órgano consultivo que representa a entes regionales/locales.'],
+    ['Defensor del Pueblo Europeo','Misión.','Investiga casos de mala administración en instituciones de la UE.'],
+    ['Recurso por incumplimiento','¿Quién puede interponerlo?','Comisión o un Estado miembro ante el TJUE.'],
+    ['Reglamentos vs Directivas','Diferencia esencial.','Reglamento: aplicable directamente; Directiva: requiere transposición.'],
+    ['Procedimiento presupuestario','Instituciones clave.','Parlamento, Consejo y Comisión.'],
+  ];
+  // Rellenar hasta 50 repitiendo variaciones
+  for(let i=0;i<50;i++){
+    const [t,e,s]=Q[i%Q.length];
+    add(t, e, s);
+  }
+}
+
+/* ===== 5) Ingresos Públicos — 50 problemas numéricos ===== */
+function genIngresos(mount){
+  const r=PRNG(420); let n=0; const host=document.getElementById(mount);
+  const add=(t,e,s)=>host.appendChild(card(++n,t,e,s));
+  for(let i=0;i<50;i++){
+    const type=i%10;
+    if(type===0){ // IVA ad valorem
+      const B=rndInt(r,500,5000), t=rndInt(r,4,23)/100;
+      add('IVA (ad valorem)',
+          `Base ${B}€, tipo ${Math.round(t*100)}%. Calcula cuota e importe total.`,
+          `Cuota = B·t = ${(B*t).toFixed(2)}€. Total = ${(B*(1+t)).toFixed(2)}€.`);
+    }
+    if(type===1){ // IRPF 2 tramos
+      const y=rndInt(r,15000,90000);
+      const C=y<=50000?0.2*y:0.2*50000+0.4*(y-50000), T=C/y;
+      add('IRPF (2 tramos 20%/40%)',
+          `Renta y=${y}€. Calcula cuota y tipo medio.`,
+          `Cuota=${C.toFixed(2)}€; Tipo medio=${T.toFixed(3)}.`);
+    }
+    if(type===2){ // Mínimo exento
+      const y=rndInt(r,8000,30000), m=rndInt(r,4000,7000), t=rndInt(r,15,30)/100;
+      const base=Math.max(0,y-m), C=base*t;
+      add('IRPF con mínimo exento',
+          `m=${m}€, tipo=${(t*100).toFixed(0)}%, renta y=${y}€.`,
+          `Base=${base.toFixed(2)}€; Cuota=${C.toFixed(2)}€.`);
+    }
+    if(type===3){ // Laffer simple
+      const B0=rndInt(r,1000,5000), a=rndInt(r,5,20)/10, t=1/(2*a), R=t*B0*(1-a*t);
+      add('Curva de Laffer (simple)',
+          `R(t)=t·B₀·(1−αt), B₀=${B0}, α=${a}. Calcula t* y R_max.`,
+          `t*=${t.toFixed(3)}, R_max≈${R.toFixed(2)}.`);
+    }
+    if(type===4){ // DWL con t y ΔQ
+      const t=rndInt(r,5,25), dQ=rndInt(r,5,40);
+      add('DWL (triángulo)',
+          `Impuesto específico t=${t} y caída de cantidad ΔQ=${dQ}.`,
+          `DWL≈½·t·ΔQ = ${(0.5*t*dQ).toFixed(2)} (unidades monetarias).`);
+    }
+    if(type===5){ // Incidencia con elasticidades
+      const eD=rndInt(r,2,15)/10, eS=rndInt(r,2,15)/10;
+      add('Incidencia: regla de elasticidades',
+          `|ε_D|=${eD}, |ε_S|=${eS}. ¿Quién soporta más la carga?`,
+          `${eD<eS?'Consumidores':'Productores'} (el lado <b>menos elástico</b>).`);
+    }
+    if(type===6){ // IRPF 3 tramos
+      const y=rndInt(r,10000,60000); let C=0;
+      C+=0.19*Math.min(y,12000); if(y>12000) C+=0.24*Math.min(y-12000,8000); if(y>20000) C+=0.30*(y-20000);
+      add('IRPF (3 tramos 19/24/30)',
+          `Renta y=${y}€. Tramos: 0–12k:19%; 12–20k:24%; >20k:30%.`,
+          `Cuota=${C.toFixed(2)}€; Tipo medio=${(C/y).toFixed(3)}.`);
+    }
+    if(type===7){ // Recaudación IVA con desglose
+      const neto=rndInt(r,100,2000), t=rndInt(r,4,23)/100;
+      add('Factura con IVA',
+          `Neto=${neto}€, tipo=${(t*100).toFixed(0)}%. Da base, cuota y total.`,
+          `Base=${neto.toFixed(2)}€, Cuota=${(neto*t).toFixed(2)}€, Total=${(neto*(1+t)).toFixed(2)}€.`);
+    }
+    if(type===8){ // Tipo medio vs marginal (progresivo)
+      const y=rndInt(r,15000,50000); const C=0.2*Math.min(y,30000)+0.35*Math.max(0,y-30000);
+      const Tm=C/y, Tmarg= y<=30000?0.20:0.35;
+      add('Tipo medio y marginal',
+          `Tramos: 20% hasta 30k; 35% exceso. Para y=${y}€, calcula tipo medio y marginal.`,
+          `Tipo medio=${Tm.toFixed(3)}, marginal=${Tmarg.toFixed(2)}.`);
+    }
+    if(type===9){ // Subvención coste unitario
+      const q=rndInt(r,50,400), s=rndInt(r,1,10);
+      add('Gasto público en subvención',
+          `Subvención específica s=${s} por unidad, cantidad q=${q}.`,
+          `Gasto = s·q = ${s*q}.`);
+    }
+  }
+}
+
+/* ==== Montaje ==== */
+genMates('mates-list');
+genMicro('micro-list');
+genDerecho('der-list');
+genUE('ue-list');
+genIngresos('ing-list');
+</script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microeconomía — Guía Visual Completa (UNED)</title>
+<meta name="description" content="Guía visual con explicaciones, ejemplos y gráficos interactivos de Microeconomía. Funciona offline.">
+<style>
+  :root{ --bg:#0e1224; --panel:#11183a; --ink:#eaf0ff; --muted:#9fb0d9; --brand:#7aa2ff; --accent:#50e3c2; --border:#263a77; --ok:#10b981; --warn:#f59e0b;}
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f8ff; --panel:#ffffff; --ink:#0f1324; --muted:#4e5a7d; --brand:#2b59ff; --accent:#0ea5e9; --border:#d8e1ff; --ok:#059669; --warn:#b45309;}
+  }
+  html,body{height:100%} body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; color:var(--ink); background:linear-gradient(180deg,var(--bg),#0a0f21 70%);}
+  header{position:sticky; top:0; z-index:30; background:color-mix(in oklab, var(--panel) 85%, transparent); border-bottom:1px solid var(--border); backdrop-filter:blur(8px)}
+  .wrap{max-width:1220px; margin:auto; padding:14px 16px}
+  h1{margin:0; font-size:1.9rem}
+  h2{color:var(--brand); margin:1.1rem 0 .6rem; font-size:1.35rem}
+  h3{margin:1rem 0 .4rem; font-size:1.15rem}
+  nav{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+  nav a{color:var(--muted); text-decoration:none; padding:6px 10px; border:1px solid var(--border); border-radius:10px}
+  nav a:hover{color:var(--ink); border-color:var(--brand)}
+  section{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:16px; margin:18px 0}
+  .lead{color:var(--muted)}
+  details{border:1px solid var(--border); border-radius:12px; padding:10px 12px; background:color-mix(in oklab, var(--panel) 96%, black 4%); margin:.6rem 0}
+  summary{cursor:pointer; font-weight:600}
+  .q-card{border:1px solid var(--border); border-radius:12px; padding:12px; margin:10px 0; background:color-mix(in oklab, var(--panel) 96%, black 4%)}
+  .pill{display:inline-block; padding:2px 8px; border-radius:999px; background:color-mix(in oklab, var(--accent) 22%, transparent); border:1px solid var(--border);}
+  .muted{color:var(--muted)}
+  .btn{background:var(--brand); color:#fff; border:0; border-radius:10px; padding:6px 10px; cursor:pointer}
+  .controls{display:flex; gap:8px; flex-wrap:wrap; margin:.4rem 0}
+  .controls label{background:color-mix(in oklab, var(--panel) 96%, black 4%); border:1px solid var(--border); border-radius:10px; padding:4px 8px}
+  canvas.plot{width:100%; height:400px; background:color-mix(in oklab, var(--panel) 90%, black 10%); border-radius:12px; border:1px solid var(--border); touch-action:none}
+  .badge{background:rgba(255,255,255,.06); border:1px solid var(--border); border-radius:8px; padding:2px 6px; font-size:.85rem}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media (max-width:900px){ .grid2{grid-template-columns:1fr} }
+  .sol{border-left:3px solid var(--ok); padding:.6rem .7rem; background:color-mix(in oklab, var(--panel) 92%, black 8%)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Microeconomía — <span class="pill">Guía Visual Completa (UNED)</span></h1>
+    <nav>
+      <a href="#oferta-demanda">Oferta & Demanda</a>
+      <a href="#elasticidades">Elasticidades</a>
+      <a href="#impuestos">Impuestos/Subsidios</a>
+      <a href="#controles">Precios límite</a>
+      <a href="#consumidor">Consumidor</a>
+      <a href="#costes">Producción y Costes</a>
+      <a href="#competencia">Competencia Perfecta</a>
+      <a href="#monopolio">Monopolio</a>
+      <a href="#juegos">Juegos</a>
+      <a href="#externalidades">Externalidades</a>
+      <a href="#resumen">Resumen & Ejercicios</a>
+    </nav>
+    <p class="lead">Explicaciones + ejemplos + <b>gráficas interactivas</b>. Diseñado para estudiar de forma visual. Funciona <em>offline</em>.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="oferta-demanda">
+  <h2>1) Oferta y Demanda (equilibrio, excedentes)</h2>
+  <p class="lead">Modelo canónico: <span class="badge">Demanda</span> \(Q_D=a-b\,p\) (b&gt;0), <span class="badge">Oferta</span> \(Q_S=-c+d\,p\) (d&gt;0).
+  Equilibrio cuando \(Q_D=Q_S\). Desplazamientos ≠ movimientos: precio cambia ⇒ <em>movimiento</em>; gustos/ingreso/coste ⇒ <em>desplazamiento</em>.</p>
+  <div class="q-card">
+    <h3>Visualizador de equilibrio y excedentes</h3>
+    <div class="controls">
+      <label>a: <input type="number" id="eq-a" value="100"></label>
+      <label>b: <input type="number" id="eq-b" value="2" step="0.1"></label>
+      <label>c: <input type="number" id="eq-c" value="20"></label>
+      <label>d: <input type="number" id="eq-d" value="3" step="0.1"></label>
+      <button class="btn" id="eq-calc">Graficar</button>
+      <span id="eq-out" class="pill"></span>
+    </div>
+    <canvas id="eq-canvas" class="plot"></canvas>
+    <details><summary>Notas y fórmulas</summary>
+      <div class="sol">
+        <ul>
+          <li>\(p^*=\dfrac{a+c}{b+d}\), \(q^*=a-bp^*\).</li>
+          <li>Excedente del consumidor (triángulo): \(EC=\tfrac12 (p_{\text{intercepto}}-p^*)q^*\), con \(p_{\text{int}}=a/b\).</li>
+          <li>Excedente del productor: \(EP=\tfrac12 (p^*-p_{\text{of,int}})q^*\), con \(p_{\text{of,int}}=c/d\).</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="elasticidades">
+  <h2>2) Elasticidades (precio, ingreso, cruce)</h2>
+  <p class="lead">Elasticidad precio puntual de demanda \( \varepsilon = \frac{dQ}{dp}\cdot \frac{p}{Q}\). Para demanda lineal \(Q=a-bp\): \(\varepsilon=-(b\,p)/Q\).</p>
+  <div class="q-card grid2">
+    <div>
+      <h3>Elasticidad puntual y ingreso total</h3>
+      <div class="controls">
+        <label>a: <input type="number" id="el-a" value="120"></label>
+        <label>b: <input type="number" id="el-b" value="3" step="0.1"></label>
+        <label>p₀: <input type="number" id="el-p" value="20"></label>
+        <button class="btn" id="el-calc">Calcular</button>
+        <span id="el-out" class="pill"></span>
+      </div>
+      <canvas id="el-canvas" class="plot"></canvas>
+    </div>
+    <div>
+      <details open><summary>Claves para examen</summary>
+        <div class="sol">
+          <ul>
+            <li>Si \(|\varepsilon|&gt;1\): demanda elástica ⇒ subir p ↓ ingreso total.</li>
+            <li>Si \(|\varepsilon|=1\): ingreso total máximo.</li>
+            <li>Si \(|\varepsilon|&lt;1\): demanda inelástica ⇒ subir p ↑ ingreso total.</li>
+          </ul>
+        </div>
+      </details>
+      <details><summary>Ejemplo guiado</summary>
+        <div class="sol">
+          Con \(a=120,b=3,p_0=20\): \(Q_0=60\), \(\varepsilon=-1\). Ingreso total \(IT=pQ=1200\) (máximo).
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="impuestos">
+  <h2>3) Impuestos y Subsidios (incidencia, recaudación, DWL)</h2>
+  <p class="lead">Impuesto específico \(t\) al productor desplaza la oferta: \(Q=-c+d(p-t)\).
+  Reparto de carga depende de elasticidades: paga más quien es menos elástico.</p>
+  <div class="q-card">
+    <h3>Impuesto específico — equilibrio tras impuesto</h3>
+    <div class="controls">
+      <label>a: <input type="number" id="tx-a" value="100"></label>
+      <label>b: <input type="number" id="tx-b" value="2" step="0.1"></label>
+      <label>c: <input type="number" id="tx-c" value="20"></label>
+      <label>d: <input type="number" id="tx-d" value="3" step="0.1"></label>
+      <label>t: <input type="number" id="tx-t" value="10"></label>
+      <button class="btn" id="tx-calc">Graficar</button>
+      <span id="tx-out" class="pill"></span>
+    </div>
+    <canvas id="tx-canvas" class="plot"></canvas>
+    <details><summary>Fórmulas y áreas</summary>
+      <div class="sol">
+        <ul>
+          <li>Nuevo equilibrio: \(p_c=\dfrac{a+c+t}{b+d}\), \(q=a-bp_c\), \(p_p=p_c-t\).</li>
+          <li>Recaudación: \(T=t\cdot q\). DWL ≈ \(\tfrac12 t\cdot (q_0-q)\).</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="controles">
+  <h2>4) Controles de precios (techo y suelo)</h2>
+  <div class="q-card">
+    <h3>Techo de precio</h3>
+    <div class="controls">
+      <label>a: <input type="number" id="pc-a" value="100"></label>
+      <label>b: <input type="number" id="pc-b" value="2" step="0.1"></label>
+      <label>c: <input type="number" id="pc-c" value="20"></label>
+      <label>d: <input type="number" id="pc-d" value="3" step="0.1"></label>
+      <label>p̄: <input type="number" id="pc-p" value="10"></label>
+      <button class="btn" id="pc-calc">Graficar</button>
+      <span id="pc-out" class="pill"></span>
+    </div>
+    <canvas id="pc-canvas" class="plot"></canvas>
+  </div>
+  <div class="q-card">
+    <h3>Precio mínimo</h3>
+    <div class="controls">
+      <label>a: <input type="number" id="pm-a" value="100"></label>
+      <label>b: <input type="number" id="pm-b" value="2" step="0.1"></label>
+      <label>c: <input type="number" id="pm-c" value="20"></label>
+      <label>d: <input type="number" id="pm-d" value="3" step="0.1"></label>
+      <label>pₘᵢₙ: <input type="number" id="pm-p" value="20"></label>
+      <button class="btn" id="pm-calc">Graficar</button>
+      <span id="pm-out" class="pill"></span>
+    </div>
+    <canvas id="pm-canvas" class="plot"></canvas>
+  </div>
+</section>
+
+<section id="consumidor">
+  <h2>5) Teoría del Consumidor (CD, MRS, Óptimo)</h2>
+  <p class="lead">Cobb–Douglas \(U(x,y)=x^{\alpha}y^{1-\alpha}\) ⇒ \( \text{MRS}=\dfrac{\alpha}{1-\alpha}\cdot \dfrac{y}{x}\). Óptimo con restricción \(p_xx+p_yy=m\): \(x^*=\frac{\alpha m}{p_x}\), \(y^*=\frac{(1-\alpha)m}{p_y}\).</p>
+  <div class="q-card">
+    <h3>Óptimo CD con recta presupuestaria</h3>
+    <div class="controls">
+      <label>α: <input type="number" id="cd-a" value="0.5" step="0.05" min="0.05" max="0.95"></label>
+      <label>m: <input type="number" id="cd-m" value="100"></label>
+      <label>pₓ: <input type="number" id="cd-px" value="2"></label>
+      <label>p_y: <input type="number" id="cd-py" value="1"></label>
+      <button class="btn" id="cd-calc">Graficar</button>
+      <span id="cd-out" class="pill"></span>
+    </div>
+    <canvas id="cd-canvas" class="plot"></canvas>
+    <details><summary>Condiciones FOC (esbozo)</summary>
+      <div class="sol">
+        Lagrangiano \( \mathcal{L}=x^{\alpha}y^{1-\alpha}+\lambda(m-p_xx-p_yy)\).  
+        FOC: \(\alpha x^{\alpha-1}y^{1-\alpha}/p_x=(1-\alpha)x^{\alpha}y^{-\alpha}/p_y\) ⇒ \( \text{MRS}=p_x/p_y\).
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="costes">
+  <h2>6) Producción y Costes (MC, AVC, ATC)</h2>
+  <p class="lead">Ejemplo: \(C(q)=F + \beta q + \gamma q^2\).  
+  \(MC = \beta + 2\gamma q\), \(AVC=\frac{\beta}{q}+\gamma q\), \(ATC=\frac{F}{q}+AVC\). Mínimo de ATC cuando \(MC=ATC\).</p>
+  <div class="q-card">
+    <h3>Curvas de coste</h3>
+    <div class="controls">
+      <label>F: <input type="number" id="co-F" value="40"></label>
+      <label>β: <input type="number" id="co-b" value="10"></label>
+      <label>γ: <input type="number" id="co-g" value="1" step="0.1"></label>
+      <button class="btn" id="co-calc">Graficar</button>
+      <span id="co-out" class="pill"></span>
+    </div>
+    <canvas id="co-canvas" class="plot"></canvas>
+  </div>
+</section>
+
+<section id="competencia">
+  <h2>7) Competencia Perfecta (corto plazo)</h2>
+  <p class="lead">Empresa tomadora de precios. Óptimo: \(p=MC(q)\). Oferta individual: tramo de \(MC\) por encima de \(AVC\). Punto de cierre cuando \(p&lt;\min AVC\).</p>
+  <div class="q-card">
+    <h3>Óptimo de la firma competitiva</h3>
+    <div class="controls">
+      <label>p: <input type="number" id="cp-p" value="22"></label>
+      <label>β: <input type="number" id="cp-b" value="10"></label>
+      <label>γ: <input type="number" id="cp-g" value="1" step="0.1"></label>
+      <label>F: <input type="number" id="cp-F" value="40"></label>
+      <button class="btn" id="cp-calc">Calcular & mostrar</button>
+      <span id="cp-out" class="pill"></span>
+    </div>
+    <canvas id="cp-canvas" class="plot"></canvas>
+  </div>
+</section>
+
+<section id="monopolio">
+  <h2>8) Monopolio (MR=MC, DWL)</h2>
+  <p class="lead">Demanda inversa \(p=a-bq\), \(MR=a-2bq\). Con \(MC=c\): \(q_M=\frac{a-c}{2b}\), \(p_M=a-bq_M\). DWL frente a competencia.</p>
+  <div class="q-card">
+    <h3>Monopolio lineal</h3>
+    <div class="controls">
+      <label>a: <input type="number" id="mo-a" value="100"></label>
+      <label>b: <input type="number" id="mo-b" value="2" step="0.1"></label>
+      <label>c (MC): <input type="number" id="mo-c" value="20"></label>
+      <button class="btn" id="mo-calc">Calcular & graficar</button>
+      <span id="mo-out" class="pill"></span>
+    </div>
+    <canvas id="mo-canvas" class="plot"></canvas>
+  </div>
+</section>
+
+<section id="juegos">
+  <h2>9) Juegos y Oligopolio (muy breve)</h2>
+  <div class="q-card">
+    <h3>Dilema del prisionero (pago normal-form)</h3>
+    <p class="lead">Estrategias: Cooperar (C) / Desviarse (D). (fila, columna).</p>
+    <div class="grid2">
+      <div>
+        <table style="border-collapse:collapse; border:1px solid var(--border)">
+          <tr><th></th><th>C</th><th>D</th></tr>
+          <tr><th>C</th><td style="border:1px solid var(--border); padding:6px">(-1,-1)</td><td style="border:1px solid var(--border); padding:6px">(-3,0)</td></tr>
+          <tr><th>D</th><td style="border:1px solid var(--border); padding:6px">(0,-3)</td><td style="border:1px solid var(--border); padding:6px">(-2,-2)</td></tr>
+        </table>
+      </div>
+      <div>
+        <details open><summary>Idea clave</summary>
+          <div class="sol">D domina a C para ambos jugadores ⇒ (D,D) es equilibrio de Nash, pero no es eficiente de Pareto.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+  <div class="q-card">
+    <h3>Cournot (intuición)</h3>
+    <p class="lead">Con demanda \(p=a-b(q_1+q_2)\) y costes \(c\): \(q_i^*=\frac{a-c}{3b}\), \(Q^*=\frac{2(a-c)}{3b}\), \(p^*=a-bQ^*\).</p>
+  </div>
+</section>
+
+<section id="externalidades">
+  <h2>10) Externalidades & Pigouviano</h2>
+  <p class="lead">Coste externo marginal (CEM) ↑ ⇒ óptimo social cuando \(SMC=PMC+CEM\) corta demanda. Impuesto pigouviano \(t^*=CEM(q^*)\).</p>
+  <div class="q-card">
+    <h3>Gráfico esquemático (lineal)</h3>
+    <div class="controls">
+      <label>a: <input type="number" id="ex-a" value="100"></label>
+      <label>b: <input type="number" id="ex-b" value="2"></label>
+      <label>c: <input type="number" id="ex-c" value="20"></label>
+      <label>d: <input type="number" id="ex-d" value="3"></label>
+      <label>k (CEM): <input type="number" id="ex-k" value="10"></label>
+      <button class="btn" id="ex-calc">Graficar</button>
+      <span id="ex-out" class="pill"></span>
+    </div>
+    <canvas id="ex-canvas" class="plot"></canvas>
+  </div>
+</section>
+
+<section id="resumen">
+  <h2>11) Resumen “de bolsillo” + Ejemplos</h2>
+  <div class="q-card">
+    <h3>Fórmulas clave</h3>
+    <ul>
+      <li>Equilibrio lineal: \(p^*=\dfrac{a+c}{b+d}\), \(q^*=a-bp^*\).</li>
+      <li>Elasticidad puntual (lineal): \(\varepsilon=-(b\,p)/Q\).</li>
+      <li>Impuesto específico: \(p_c=\dfrac{a+c+t}{b+d}\), \(p_p=p_c-t\), \(q=a-bp_c\).</li>
+      <li>Monopolio: \(q_M=\dfrac{a-c}{2b}\), \(p_M=\dfrac{a+c}{2}\).</li>
+      <li>CD óptimo: \(x^*=\dfrac{\alpha m}{p_x}\), \(y^*=\dfrac{(1-\alpha)m}{p_y}\).</li>
+      <li>MC y ATC: \(MC=\beta+2\gamma q\); \(\min ATC\) cuando \(MC=ATC\).</li>
+    </ul>
+  </div>
+  <div class="q-card">
+    <h3>Ejemplos resueltos (abre para ver)</h3>
+    <details><summary>1) Equilibrio y excedentes</summary><div class="sol">Con \(a=120,b=3,c=30,d=2\): \(p^*=(120+30)/(3+2)=30\); \(q^*=120-3·30=30\). \(p_{\text{int}}=40\), \(p_{\text{of,int}}=15\). \(EC=½(40-30)·30=150\). \(EP=½(30-15)·30=225\).</div></details>
+    <details><summary>2) Elasticidad e ingreso</summary><div class="sol">Para \(a=100,b=2,p=25\): \(Q=50\), \(\varepsilon=-(2·25)/50=-1\). Ingreso total máximo.</div></details>
+    <details><summary>3) Impuesto específico</summary><div class="sol">Con \(a=100,b=2,c=20,d=3,t=10\): \(p_c=26\), \(q=48\), \(p_p=16\), \(T=480\), \(\text{DWL}\approx ½·10·(q_0-q)=½·10·(52-48)=20\).</div></details>
+    <details><summary>4) CD óptimo</summary><div class="sol">\(\alpha=0.4, m=120, p_x=3, p_y=2\) ⇒ \(x^*=16, y^*=36\).</div></details>
+    <details><summary>5) Monopolio</summary><div class="sol">\(a=100,b=2,c=20\): \(q_M=20\), \(p_M=60\). Competencia: \(p^*=40, q^*=30\). DWL = triángulo entre MR/MC y demanda (se ve en el gráfico).</div></details>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap" style="color:var(--muted); text-align:center; padding:26px 0">Guía Visual de Microeconomía · Funciona sin conexión</footer>
+
+<script>
+/* ===== utilidades canvas ===== */
+function el(tag, attrs={}, html=''){ const e=document.createElement(tag); Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v)); e.innerHTML=html; return e; }
+function fmt(x){ const a=Math.abs(x); return (a>=1000||(a>0&&a<1e-3))? x.toExponential(2) : (Math.round(x*1000)/1000)+''; }
+function plotAxes(cv, xMax, yMax, labels={x:'p', y:'Q'}){
+  const ctx=cv.getContext('2d'), W=cv.clientWidth, H=cv.clientHeight;
+  const DPR=Math.max(1,Math.floor(window.devicePixelRatio||1)); cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.clearRect(0,0,W,H);
+  // axes
+  ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--border'); ctx.beginPath();
+  ctx.moveTo(40,H-30); ctx.lineTo(W-10,H-30); ctx.moveTo(40,10); ctx.lineTo(40,H-30); ctx.stroke();
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--muted');
+  ctx.fillText(labels.x, W-20, H-34); ctx.fillText(labels.y, 20, 20);
+  return {ctx,W,H,px:(p)=>40+(p/xMax)*(W-60), qy:(q)=> (H-30)-(q/yMax)*(H-50)};
+}
+
+/* ===== Sección 1: Equilibrio ===== */
+function drawEquilibrio(){
+  const get=id=>+document.getElementById(id).value; const a=get('eq-a'), b=get('eq-b'), c=get('eq-c'), d=get('eq-d');
+  const p=(a+c)/(b+d), q=a-b*p; document.getElementById('eq-out').textContent=`p*=${fmt(p)}, q*=${fmt(q)}`;
+  const cv=document.getElementById('eq-canvas'); const pMax=Math.max(p*1.6,(a/b)*1.1,(c/d)*1.5,10); const qMax=Math.max(a,(-c+d*pMax), (a-b*0))*1.2;
+  const {ctx,px,qy}=plotAxes(cv,pMax,qMax,{x:'p',y:'Q'});
+  const yD=(pp)=>a-b*pp, yS=(pp)=>-c+d*pp;
+  // demanda
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(px(0), qy(yD(0))); ctx.lineTo(px(pMax), qy(yD(pMax))); ctx.stroke();
+  // oferta
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); ctx.moveTo(px(0), qy(yS(0))); ctx.lineTo(px(pMax), qy(yS(pMax))); ctx.stroke();
+  // equilibrio
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px(p),qy(q),4,0,2*Math.PI); ctx.fill(); ctx.fillText(`p*=${fmt(p)}, q*=${fmt(q)}`, px(p)+6, qy(q)-6);
+  // excedentes (sombras simples)
+  const pd=a/b, ps=c/d;
+  ctx.fillStyle='rgba(122,162,255,0.25)'; ctx.beginPath(); ctx.moveTo(px(0),qy(pd)); ctx.lineTo(px(p),qy(q)); ctx.lineTo(px(p),qy(pd)); ctx.closePath(); ctx.fill();
+  ctx.fillStyle='rgba(80,227,194,0.25)'; ctx.beginPath(); ctx.moveTo(px(0),qy(ps)); ctx.lineTo(px(p),qy(q)); ctx.lineTo(px(p),qy(ps)); ctx.closePath(); ctx.fill();
+}
+document.getElementById('eq-calc').addEventListener('click', drawEquilibrio); window.addEventListener('load', drawEquilibrio);
+
+/* ===== Sección 2: Elasticidad ===== */
+function drawElasticidad(){
+  const get=id=>+document.getElementById(id).value; const a=get('el-a'), b=get('el-b'), p0=get('el-p'); const Q=a-b*p0, eps=-(b*p0)/Q;
+  document.getElementById('el-out').textContent=`Q₀=${fmt(Q)}, ε=${fmt(eps)}, IT=${fmt(p0*Q)}`;
+  const cv=document.getElementById('el-canvas'); const pMax=Math.max(p0*1.6,(a/b)*1.1,10); const qMax=Math.max(a, a-b*0)*1.2;
+  const {ctx,px,qy}=plotAxes(cv,pMax,qMax,{x:'p',y:'Q'}); const yD=(p)=>a-b*p;
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(px(0), qy(yD(0))); ctx.lineTo(px(pMax), qy(yD(pMax))); ctx.stroke();
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px(p0), qy(Q), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`(p₀,Q₀)=(${fmt(p0)},${fmt(Q)})`, px(p0)+6, qy(Q)-6);
+}
+document.getElementById('el-calc').addEventListener('click', drawElasticidad); window.addEventListener('load', drawElasticidad);
+
+/* ===== Sección 3: Impuestos ===== */
+function drawImpuesto(){
+  const g=id=>+document.getElementById(id).value; const a=g('tx-a'), b=g('tx-b'), c=g('tx-c'), d=g('tx-d'), t=g('tx-t');
+  const p0=(a+c)/(b+d), q0=a-b*p0;
+  const pc=(a+c+t)/(b+d), q=a-b*pc, pp=pc-t, dwl=0.5*t*(q0-q);
+  document.getElementById('tx-out').textContent=`q=${fmt(q)}, p_c=${fmt(pc)}, p_p=${fmt(pp)}, DWL≈${fmt(dwl)}`;
+  const cv=document.getElementById('tx-canvas'); const pMax=Math.max(pc*1.6, (a/b)*1.1, ((c+t)/d)*1.6, 10); const qMax=Math.max(a, -c+d*pMax, a-b*0)*1.2;
+  const {ctx,px,qy}=plotAxes(cv,pMax,qMax,{x:'p',y:'Q'}); const yD=(p)=>a-b*p, yS=(p)=>-c+d*p, ySt=(p)=>-c+d*(p-t);
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(px(0), qy(yD(0))); ctx.lineTo(px(pMax), qy(yD(pMax))); ctx.stroke();
+  ctx.strokeStyle='rgba(80,227,194,0.5)'; ctx.beginPath(); ctx.moveTo(px(0), qy(yS(0))); ctx.lineTo(px(pMax), qy(yS(pMax))); ctx.stroke();
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); ctx.moveTo(px(0), qy(ySt(0))); ctx.lineTo(px(pMax), qy(ySt(pMax))); ctx.stroke();
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px(pc), qy(q), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`q=${fmt(q)}`, px(pc)+6, qy(q)-6);
+  ctx.strokeStyle='rgba(255,255,255,0.7)'; ctx.setLineDash([6,6]); ctx.beginPath(); ctx.moveTo(px(pc), qy(pp)); ctx.lineTo(px(pc), qy(pc)); ctx.stroke(); ctx.setLineDash([]);
+}
+document.getElementById('tx-calc').addEventListener('click', drawImpuesto); window.addEventListener('load', drawImpuesto);
+
+/* ===== Sección 4: Techo/Suelo ===== */
+function drawTecho(){
+  const g=id=>+document.getElementById(id).value; const a=g('pc-a'), b=g('pc-b'), c=g('pc-c'), d=g('pc-d'), pbar=g('pc-p');
+  const Qd=a-b*pbar, Qs=-c+d*pbar; document.getElementById('pc-out').textContent=`Qd=${fmt(Qd)}, Qs=${fmt(Qs)}, escasez=${fmt(Qd-Qs)}`;
+  const cv=document.getElementById('pc-canvas'); const pMax=Math.max(pbar*1.6,(a/b)*1.1,(c/d)*1.5,10); const qMax=Math.max(a, -c+d*pMax)*1.2;
+  const {ctx,px,qy}=plotAxes(cv,pMax,qMax,{x:'p',y:'Q'}); const yD=(p)=>a-b*p, yS=(p)=>-c+d*p;
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(px(0), qy(yD(0))); ctx.lineTo(px(pMax), qy(yD(pMax))); ctx.stroke();
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); ctx.moveTo(px(0), qy(yS(0))); ctx.lineTo(px(pMax), qy(yS(pMax))); ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,0.6)'; ctx.beginPath(); ctx.moveTo(px(pbar), qy(0)); ctx.lineTo(px(pbar), qy(qMax)); ctx.stroke();
+}
+document.getElementById('pc-calc').addEventListener('click', drawTecho);
+
+function drawSuelo(){
+  const g=id=>+document.getElementById(id).value; const a=g('pm-a'), b=g('pm-b'), c=g('pm-c'), d=g('pm-d'), pmin=g('pm-p');
+  const Qd=a-b*pmin, Qs=-c+d*pmin; document.getElementById('pm-out').textContent=`Qd=${fmt(Qd)}, Qs=${fmt(Qs)}, excedente=${fmt(Qs-Qd)}`;
+  const cv=document.getElementById('pm-canvas'); const pMax=Math.max(pmin*1.6,(a/b)*1.1,(c/d)*1.5,10); const qMax=Math.max(a, -c+d*pMax)*1.2;
+  const {ctx,px,qy}=plotAxes(cv,pMax,qMax,{x:'p',y:'Q'}); const yD=(p)=>a-b*p, yS=(p)=>-c+d*p;
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(px(0), qy(yD(0))); ctx.lineTo(px(pMax), qy(yD(pMax))); ctx.stroke();
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); ctx.moveTo(px(0), qy(yS(0))); ctx.lineTo(px(pMax), qy(yS(pMax))); ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,0.6)'; ctx.beginPath(); ctx.moveTo(px(pmin), qy(0)); ctx.lineTo(px(pmin), qy(qMax)); ctx.stroke();
+}
+document.getElementById('pm-calc').addEventListener('click', drawSuelo);
+
+/* ===== Sección 5: Consumidor (CD) ===== */
+function drawCD(){
+  const g=id=>+document.getElementById(id).value; const a=+g('cd-a'), m=g('cd-m'), px=g('cd-px'), py=g('cd-py');
+  const xStar=a*m/px, yStar=(1-a)*m/py; document.getElementById('cd-out').textContent=`x*=${fmt(xStar)}, y*=${fmt(yStar)}`;
+  const cv=document.getElementById('cd-canvas'); const xMax=Math.max(xStar*1.6, m/px*1.2, 10), yMax=Math.max(yStar*1.6, m/py*1.2, 10);
+  const {ctx,px:xx,qy:yy}=plotAxes(cv,xMax,yMax,{x:'x',y:'y'});
+  // presupuesto: y = m/p_y - (p_x/p_y) x
+  const y0=m/py, slope=px/py;
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(xx(0), yy(y0)); ctx.lineTo(xx(xMax), yy(y0 - slope*xMax)); ctx.stroke();
+  // indiferencia CD que pasa por (x*,y*): x^a y^{1-a}=U* => y = (U / x^a)^{1/(1-a)}
+  const U = Math.pow(xStar,a)*Math.pow(yStar,1-a);
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath();
+  for(let i=0;i<=300;i++){ const x=i/300*xMax; const y=Math.pow(U/Math.pow(x||1e-6,a), 1/(1-a)); const X=xx(x), Y=yy(Math.min(y,yMax)); if(i===0) ctx.moveTo(X,Y); else ctx.lineTo(X,Y); }
+  ctx.stroke();
+  // punto óptimo
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(xx(xStar), yy(yStar), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`(${fmt(xStar)}, ${fmt(yStar)})`, xx(xStar)+6, yy(yStar)-6);
+}
+document.getElementById('cd-calc').addEventListener('click', drawCD);
+
+/* ===== Sección 6–7: Costes y Competencia ===== */
+function drawCostes(){
+  const g=id=>+document.getElementById(id).value; const F=g('co-F'), beta=g('co-b'), gamma=g('co-g');
+  const cv=document.getElementById('co-canvas'); const qMax=60;
+  const {ctx,px,qy}=plotAxes(cv,qMax, Math.max( (F/5)+beta+2*gamma*qMax, 100), {x:'q', y:'coste/precio'});
+  function MC(q){ return beta+2*gamma*q; }
+  function AVC(q){ return beta/q + gamma*q; }
+  function ATC(q){ return F/q + AVC(q); }
+  // curvas
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); for(let i=1;i<=qMax;i++){ const q=i; const y=MC(q); const X=px(q), Y=qy(y); if(i===1) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);} ctx.stroke();
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); for(let i=1;i<=qMax;i++){ const q=i; const y=AVC(q); const X=px(q), Y=qy(y); if(i===1) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);} ctx.stroke();
+  ctx.strokeStyle='#f2a'; ctx.beginPath(); for(let i=1;i<=qMax;i++){ const q=i; const y=ATC(q); const X=px(q), Y=qy(y); if(i===1) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);} ctx.stroke();
+}
+document.getElementById('co-calc').addEventListener('click', drawCostes);
+
+function drawCP(){
+  const g=id=>+document.getElementById(id).value; const p=g('cp-p'), beta=g('cp-b'), gamma=g('cp-g'), F=g('cp-F');
+  const qShutdown = Math.sqrt(beta/gamma), pMinAVC = beta/qShutdown + gamma*qShutdown;
+  let qStar = (p-beta)/(2*gamma); if(p<pMinAVC) qStar=0;
+  document.getElementById('cp-out').textContent = p<pMinAVC ? `p<min AVC ⇒ cierre. minAVC≈${fmt(pMinAVC)}` : `q*≈${fmt(qStar)} (p=MC).`;
+  const cv=document.getElementById('cp-canvas'); const qMax=Math.max(qShutdown*2, qStar*1.5, 50); const yMax=Math.max(p*1.4, pMinAVC*1.4, beta+2*gamma*qMax);
+  const {ctx,px,qy}=plotAxes(cv,qMax,yMax,{x:'q', y:'coste/precio'});
+  function MC(q){ return beta+2*gamma*q; }
+  function AVC(q){ return beta/q + gamma*q; }
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); for(let i=1;i<=qMax;i++){ const q=i; const y=MC(q); const X=px(q), Y=qy(y); if(i===1) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);} ctx.stroke();
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); for(let i=1;i<=qMax;i++){ const q=i; const y=AVC(q); const X=px(q), Y=qy(y); if(i===1) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);} ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,0.7)'; ctx.beginPath(); ctx.moveTo(px(0), qy(p)); ctx.lineTo(px(qMax), qy(p)); ctx.stroke();
+  if(qStar>0){ ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px(qStar), qy(p), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`q*`, px(qStar)+6, qy(p)-6); }
+}
+document.getElementById('cp-calc').addEventListener('click', drawCP);
+
+/* ===== Sección 8: Monopolio ===== */
+function drawMonopolio(){
+  const g=id=>+document.getElementById(id).value; const a=g('mo-a'), b=g('mo-b'), c=g('mo-c');
+  const qM=(a-c)/(2*b), pM=a-b*qM; const qC=(a-c)/b, pC=c; document.getElementById('mo-out').textContent = `q_M=${fmt(qM)}, p_M=${fmt(pM)}; competencia: (p=${fmt(pC)}, q=${fmt(qC)})`;
+  const cv=document.getElementById('mo-canvas'); const qMax=Math.max(qC*1.2, qM*1.6, 50); const pMax=Math.max(a/b*1.1, pM*1.4, pC*1.4, 100);
+  const {ctx,px,qy}=plotAxes(cv,qMax,pMax,{x:'q', y:'p'});
+  const D=(q)=>a-b*q, MR=(q)=>a-2*b*q, MC=()=>c;
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(px(0), qy(D(0))); ctx.lineTo(px(qMax), qy(D(qMax))); ctx.stroke();
+  ctx.strokeStyle='rgba(122,162,255,0.5)'; ctx.beginPath(); ctx.moveTo(px(0), qy(MR(0))); ctx.lineTo(px(qMax), qy(MR(qMax))); ctx.stroke();
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); ctx.moveTo(px(0), qy(MC())); ctx.lineTo(px(qMax), qy(MC())); ctx.stroke();
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px(qM), qy(pM), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`M`, px(qM)+6, qy(pM)-6);
+  ctx.beginPath(); ctx.arc(px(qC), qy(pC), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`C`, px(qC)+6, qy(pC)-6);
+  ctx.fillStyle='rgba(255, 99, 132, 0.22)'; ctx.beginPath(); ctx.moveTo(px(qM), qy(pM)); ctx.lineTo(px(qC), qy(pC)); ctx.lineTo(px(qC), qy(D(qC))); ctx.closePath(); ctx.fill();
+}
+document.getElementById('mo-calc').addEventListener('click', drawMonopolio);
+
+/* ===== Sección 10: Externalidad ===== */
+function drawExt(){
+  const g=id=>+document.getElementById(id).value; const a=g('ex-a'), b=g('ex-b'), c=g('ex-c'), d=g('ex-d'), k=g('ex-k');
+  const pP=(a+c)/(b+d), qP=a-b*pP;
+  const pS=(a+c+k)/(b+d), qS=a-b*pS;
+  const cv=document.getElementById('ex-canvas'); const pMax=Math.max(pS*1.6, (a/b)*1.1, (c/d+k)*1.6, 10); const qMax=Math.max(a, -c+d*pMax)*1.2;
+  const {ctx,px,qy}=plotAxes(cv,qMax,pMax,{x:'Q',y:'p'});
+  const pD=(Q)=> (a-Q)/b, pPMC=(Q)=> (Q+c)/d, pSMC=(Q)=> pPMC(Q)+k;
+  ctx.strokeStyle='#7aa2ff'; ctx.beginPath(); ctx.moveTo(px(0), qy(pD(0))); ctx.lineTo(px(qMax), qy(pD(qMax))); ctx.stroke();
+  ctx.strokeStyle='rgba(80,227,194,0.5)'; ctx.beginPath(); ctx.moveTo(px(0), qy(pPMC(0))); ctx.lineTo(px(qMax), qy(pPMC(qMax))); ctx.stroke();
+  ctx.strokeStyle='#50e3c2'; ctx.beginPath(); ctx.moveTo(px(0), qy(pSMC(0))); ctx.lineTo(px(qMax), qy(pSMC(qMax))); ctx.stroke();
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px(qP), qy(pP), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`Privado`, px(qP)+6, qy(pP)-6);
+  ctx.beginPath(); ctx.arc(px(qS), qy(pS), 4, 0, 2*Math.PI); ctx.fill(); ctx.fillText(`Social`, px(qS)+6, qy(pS)-6);
+  document.getElementById('ex-out') && (document.getElementById('ex-out').textContent=`Priv: (p=${fmt(pP)}, q=${fmt(qP)}); Social (t=k): (p=${fmt(pS)}, q=${fmt(qS)})`);
+}
+document.getElementById('ex-calc').addEventListener('click', drawExt);
+
+/* ===== Inicializaciones ===== */
+window.addEventListener('load', ()=>{
+  drawEquilibrio(); drawElasticidad(); drawImpuesto(); drawTecho(); drawSuelo(); drawCD(); drawCostes(); drawCP(); drawMonopolio(); drawExt();
+});
+</script>
+</body>
+</html>

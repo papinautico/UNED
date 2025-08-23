@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabla de Derivadas — UNED</title>
+  <meta name="description" content="Tabla de derivadas completa: reglas básicas, exponenciales, logaritmos, trigonométricas, inversas, hiperbólicas, composiciones y recordatorios de examen."/>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root{ --bg:#0b1020; --panel:#11182d; --ink:#e9eef9; --muted:#a9b4cf; --brand:#7aa2ff; --accent:#50e3c2; --table:#16203b; --border:#26355e; }
+    @media (prefers-color-scheme: light){ :root{ --bg:#f7f9fc; --panel:#ffffff; --ink:#161a2b; --muted:#475072; --brand:#2b59ff; --accent:#0ea5e9; --table:#f1f5ff; --border:#d8e1ff; } }
+    html,body{height:100%}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; margin:0; color:var(--ink); background:linear-gradient(180deg,var(--bg),#050814 70%);}  
+    header{position:sticky; top:0; backdrop-filter: blur(8px); background:color-mix(in oklab, var(--panel) 85%, transparent); border-bottom:1px solid var(--border); z-index:10}
+    .wrap{max-width:1000px; margin:auto; padding:18px 20px}
+    .title{display:flex; gap:10px; align-items:center}
+    .badge{font-size:12px; color:var(--ink); background:var(--brand); padding:3px 8px; border-radius:999px}
+    nav{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+    nav a{color:var(--muted); text-decoration:none; padding:6px 10px; border:1px solid var(--border); border-radius:10px}
+    nav a:hover{color:var(--ink); border-color:var(--brand)}
+    main{max-width:1000px; margin:30px auto; padding:0 20px;}
+    section{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px; margin:18px 0}
+    h1,h2,h3{line-height:1.2; margin:0 0 10px}
+    h1{font-size:2rem}
+    h2{font-size:1.35rem; color:var(--brand)}
+    p.lead{color:var(--muted)}
+    table{width:100%; border-collapse:separate; border-spacing:0; background:var(--table); border:1px solid var(--border); border-radius:12px; overflow:hidden;}
+    th,td{padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top}
+    th{text-align:left; color:var(--ink); background:color-mix(in oklab, var(--table), black 4%)}
+    tr:last-child td{border-bottom:none}
+    .note{font-size:.95rem; color:var(--muted)}
+    .grid{display:grid; grid-template-columns:1fr; gap:10px}
+    @media(min-width:820px){ .grid{ grid-template-columns: 1fr 1fr; } }
+    .btns{display:flex; gap:10px; flex-wrap:wrap;}
+    .btn{background:var(--brand); color:white; border:none; border-radius:12px; padding:8px 12px; cursor:pointer}
+    .btn.alt{background:transparent; color:var(--ink); border:1px solid var(--border)}
+    footer{color:var(--muted); text-align:center; padding:40px 0}
+    kbd{background:var(--table); border:1px solid var(--border); padding:0 .4rem; border-radius:6px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;}
+    .small{font-size:.95rem}
+    .toc{font-size:.95rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <h1>Tabla de Derivadas</h1>
+        <span class="badge">UNED · Lista completa</span>
+      </div>
+      <nav class="toc">
+        <a href="#basicas">Básicas</a>
+        <a href="#exp-log">Exponenciales & Logaritmos</a>
+        <a href="#trig">Trigonométricas</a>
+        <a href="#inv-trig">Inversas trig.</a>
+        <a href="#hip">Hiperbólicas</a>
+        <a href="#comp">Composiciones</a>
+        <a href="#especial">Derivabilidad especial</a>
+        <a href="#extremos">2ª derivada / Extremos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <p class="lead">Notación: \(\tfrac{d}{dx}f(x)=f'(x)\). Regla de la cadena: \((f\circ g)'(x)=f'(g(x))\,g'(x)\). Usa <kbd>Ctrl</kbd>+<kbd>P</kbd> para imprimir.</p>
+      <div class="btns">
+        <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+        <button class="btn alt" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️ Volver arriba</button>
+      </div>
+    </section>
+
+    <section id="basicas">
+      <h2>1) Reglas básicas</h2>
+      <table>
+        <thead><tr><th>Función</th><th>Derivada</th><th>Condiciones</th></tr></thead>
+        <tbody>
+          <tr><td>\(c\) (constante)</td><td>\(0\)</td><td>—</td></tr>
+          <tr><td>\(x\)</td><td>\(1\)</td><td>—</td></tr>
+          <tr><td>\(x^{n}\)</td><td>\(n\,x^{n-1}\)</td><td>\(n\in\mathbb R\) (si \(n\) no entero, \(x>0\))</td></tr>
+          <tr><td>\(x^{-1}=1/x\)</td><td>\(-x^{-2}=-1/x^2\)</td><td>\(x\neq 0\)</td></tr>
+          <tr><td>\(\sqrt{x}=x^{1/2}\)</td><td>\(\tfrac{1}{2\sqrt{x}}\)</td><td>\(x>0\)</td></tr>
+          <tr><td>\(a\,f\pm b\,g\)</td><td>\(a f'\pm b g'\)</td><td>\(a,b\in\mathbb R\)</td></tr>
+          <tr><td>Producto \((fg)\)</td><td>\(f'g+fg'\)</td><td>—</td></tr>
+          <tr><td>Cociente \((f/g)\)</td><td>\(\dfrac{f'g-fg'}{g^{2}}\)</td><td>\(g\neq 0\)</td></tr>
+          <tr><td>Composición \(f(g(x))\)</td><td>\(f'(g(x))\,g'(x)\)</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="exp-log">
+      <h2>2) Exponenciales y logaritmos</h2>
+      <div class="grid">
+        <table>
+          <thead><tr><th>Función</th><th>Derivada</th><th>Condiciones</th></tr></thead>
+          <tbody>
+            <tr><td>\(e^{x}\)</td><td>\(e^{x}\)</td><td>—</td></tr>
+            <tr><td>\(e^{kx}\)</td><td>\(k\,e^{kx}\)</td><td>\(k\in\mathbb R\)</td></tr>
+            <tr><td>\(a^{x}\)</td><td>\(a^{x}\,\ln a\)</td><td>\(a>0, a\neq 1\)</td></tr>
+            <tr><td>\(a^{k x}\)</td><td>\(k\,a^{k x}\,\ln a\)</td><td>—</td></tr>
+            <tr><td>\(\ln x\)</td><td>\(1/x\)</td><td>\(x>0\)</td></tr>
+            <tr><td>\(\ln|x|\)</td><td>\(1/x\)</td><td>\(x\neq 0\)</td></tr>
+            <tr><td>\(\log_a x\)</td><td>\(\dfrac{1}{x\,\ln a}\)</td><td>\(a>0, a\neq 1\)</td></tr>
+            <tr><td>\(\ln(ax+b)\)</td><td>\(\dfrac{a}{ax+b}\)</td><td>\(ax+b>0\)</td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <p class="small mono">Composición útil:</p>
+          <p>Si \(y=a^{\,g(x)}\) entonces \(y'=a^{g(x)}\,\ln(a)\,g'(x)\).</p>
+          <p>Si \(y=\ln(g(x))\) entonces \(y'=\dfrac{g'(x)}{g(x)}\).</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="trig">
+      <h2>3) Trigonométricas</h2>
+      <table>
+        <thead><tr><th>Función</th><th>Derivada</th></tr></thead>
+        <tbody>
+          <tr><td>\(\sin x\)</td><td>\(\cos x\)</td></tr>
+          <tr><td>\(\cos x\)</td><td>\(-\sin x\)</td></tr>
+          <tr><td>\(\tan x\)</td><td>\(\sec^{2}x=1/\cos^{2}x\)</td></tr>
+          <tr><td>\(\cot x\)</td><td>\(-\csc^{2}x\)</td></tr>
+          <tr><td>\(\sec x\)</td><td>\(\sec x\,\tan x\)</td></tr>
+          <tr><td>\(\csc x\)</td><td>\(-\csc x\,\cot x\)</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Con cadena: \(\sin(g)\Rightarrow \cos(g)g'\), \(\cos(g)\Rightarrow -\sin(g)g'\), \(\tan(g)\Rightarrow \sec^2(g)g'\).</p>
+    </section>
+
+    <section id="inv-trig">
+      <h2>4) Inversas trigonométricas</h2>
+      <table>
+        <thead><tr><th>Función</th><th>Derivada</th><th>Condiciones</th></tr></thead>
+        <tbody>
+          <tr><td>\(\arcsin x\)</td><td>\(\dfrac{1}{\sqrt{1-x^2}}\)</td><td>\(|x|<1\)</td></tr>
+          <tr><td>\(\arccos x\)</td><td>\(-\dfrac{1}{\sqrt{1-x^2}}\)</td><td>\(|x|<1\)</td></tr>
+          <tr><td>\(\arctan x\)</td><td>\(\dfrac{1}{1+x^2}\)</td><td>\(x\in\mathbb R\)</td></tr>
+          <tr><td>\(\operatorname{arcsec} x\)</td><td>\(\dfrac{1}{|x|\,\sqrt{x^2-1}}\)</td><td>\(|x|>1\)</td></tr>
+          <tr><td>\(\operatorname{arccsc} x\)</td><td>\(-\dfrac{1}{|x|\,\sqrt{x^2-1}}\)</td><td>\(|x|>1\)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="hip">
+      <h2>5) Hiperbólicas</h2>
+      <table>
+        <thead><tr><th>Función</th><th>Derivada</th></tr></thead>
+        <tbody>
+          <tr><td>\(\sinh x\)</td><td>\(\cosh x\)</td></tr>
+          <tr><td>\(\cosh x\)</td><td>\(\sinh x\)</td></tr>
+          <tr><td>\(\tanh x\)</td><td>\(\operatorname{sech}^2 x\)</td></tr>
+          <tr><td>\(\operatorname{coth} x\)</td><td>\(-\operatorname{csch}^2 x\)</td></tr>
+          <tr><td>\(\operatorname{sech} x\)</td><td>\(-\operatorname{sech} x\,\tanh x\)</td></tr>
+          <tr><td>\(\operatorname{csch} x\)</td><td>\(-\operatorname{csch} x\,\operatorname{coth} x\)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="comp">
+      <h2>6) Composiciones típicas (muy usadas)</h2>
+      <table>
+        <thead><tr><th>Función</th><th>Derivada</th><th>Notas</th></tr></thead>
+        <tbody>
+          <tr><td>\((ax+b)^n\)</td><td>\(n\,a\,(ax+b)^{n-1}\)</td><td>\(n\in\mathbb R\)</td></tr>
+          <tr><td>\(\ln(g(x))\)</td><td>\(\dfrac{g'}{g}\)</td><td>\(g(x)>0\)</td></tr>
+          <tr><td>\(e^{g(x)}\)</td><td>\(e^{g(x)}\,g'\)</td><td>—</td></tr>
+          <tr><td>\(a^{g(x)}\)</td><td>\(a^{g(x)}\,\ln(a)\,g'\)</td><td>\(a>0\neq 1\)</td></tr>
+          <tr><td>\(g(x)^{\,h(x)}\)</td><td>\(g^{h}\,[\,h'\,\ln g + h\,g'/g\,]\)</td><td>\(g(x)>0\)</td></tr>
+          <tr><td>\((\ln x)^k\)</td><td>\(\dfrac{k(\ln x)^{k-1}}{x}\)</td><td>\(x>0\)</td></tr>
+          <tr><td>\(x^{x}\)</td><td>\(x^{x}(\ln x + 1)\)</td><td>\(x>0\)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="especial">
+      <h2>7) Derivabilidad especial</h2>
+      <table>
+        <thead><tr><th>Función</th><th>Derivada</th><th>Comentario</th></tr></thead>
+        <tbody>
+          <tr><td>\(|x|\)</td><td>\(\dfrac{x}{|x|}\) (\(x\neq 0\))</td><td>No derivable en \(x=0\)</td></tr>
+          <tr><td>\(\operatorname{sgn}(x)\)</td><td>0 (\(x\neq 0\))</td><td>No derivable en \(x=0\)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="extremos">
+      <h2>8) Segunda derivada y extremos (recordatorio)</h2>
+      <ul>
+        <li>Si \(f'(x_0)=0\) y \(f''(x_0)>0\) ⇒ <strong>mínimo relativo</strong>.</li>
+        <li>Si \(f'(x_0)=0\) y \(f''(x_0)<0\) ⇒ <strong>máximo relativo</strong>.</li>
+        <li>Si \(f'(x_0)=0\) y \(f''(x_0)=0\) ⇒ test inconcluso (usa cambio de signo de \(f'\) o estudio completo).</li>
+        <li>Concavidad: \(f''>0\) ⇒ cóncava ↑; \(f''<0\) ⇒ cóncava ↓.</li>
+      </ul>
+    </section>
+
+    <section>
+      <p class="note">Consejos de examen: escribe \(u\), \(v\) y sus derivadas antes del cociente; en potencias del tipo \(g(x)^{h(x)}\) usa <em>logaritmación</em>: si \(y=g^{h}\), entonces \(\ln y = h\ln g\).</p>
+    </section>
+
+    <footer>
+      Hecho para práctica UNED · © 2025
+    </footer>
+  </main>
+</body>
+</html>

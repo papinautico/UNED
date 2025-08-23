@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repaso — Oferta/Demanda + Impuestos/Controles (UNED)</title>
+<meta name="description" content="Batería de preguntas con soluciones ocultables para oferta/demanda, elasticidades, impuestos y controles de precios.">
+<style>
+  :root{ --bg:#0f142b; --paper:#11183a; --ink:#eaf0ff; --muted:#9fb0d9; --accent:#7aa2ff; --ok:#10b981; --border:#2a3b78;}
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f4f7ff; --paper:#ffffff; --ink:#0f1324; --muted:#4e5a7d; --accent:#2b59ff; --ok:#059669; --border:#d8e1ff;}
+  }
+  html,body{height:100%} body{margin:0; background:linear-gradient(180deg,var(--bg),#0a0f21 70%); color:var(--ink); font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+  header{position:sticky; top:0; z-index:10; background:color-mix(in oklab, var(--paper) 92%, transparent); border-bottom:1px solid var(--border); backdrop-filter:blur(6px)}
+  .wrap{max-width:1000px; margin:auto; padding:14px 16px}
+  h1{margin:.2rem 0 .4rem; font-size:1.9rem}
+  h2{color:var(--accent); margin:1.1rem 0 .6rem; font-size:1.35rem}
+  h3{margin:1rem 0 .4rem; font-size:1.1rem}
+  section{background:var(--paper); border:1px solid var(--border); border-radius:16px; padding:16px; margin:18px 0}
+  .lead{color:var(--muted)}
+  details{border:1px solid var(--border); border-radius:12px; padding:10px 12px; background:color-mix(in oklab, var(--paper) 96%, black 4%); margin:.6rem 0}
+  summary{cursor:pointer; font-weight:600}
+  .sol{border-left:3px solid var(--ok); padding:.6rem .7rem; background:color-mix(in oklab, var(--paper) 92%, black 8%)}
+  .q{margin:.4rem 0 .3rem}
+  .muted{color:var(--muted)}
+  .btn{background:var(--accent); color:#fff; border:0; border-radius:9px; padding:6px 10px; cursor:pointer}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+  ol.alpha>li{list-style: upper-alpha}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Repaso — Oferta/Demanda + Impuestos/Controles (UNED)</h1>
+    <p class="lead">Preguntas con solución ocultable. Usa el botón para mostrar/ocultar todas.</p>
+    <button id="toggleAll" class="btn">Expandir/Contraer soluciones</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="bloque1">
+  <h2>Bloque 1 — Oferta y Demanda (equilibrio, excedentes, elasticidades)</h2>
+
+  <h3>A) Verdadero/Falso (razonados)</h3>
+  <ol>
+    <li class="q">Subir el precio del propio bien desplaza la demanda. 
+      <details><summary>Solución</summary><div class="sol">Falso. Cambia el precio de X ⇒ movimiento a lo largo de la demanda, no desplazamiento.</div></details>
+    </li>
+    <li class="q">Si sube el precio de un sustituto de X, la demanda de X aumenta.
+      <details><summary>Solución</summary><div class="sol">Verdadero. Sustitución hacia X ⇒ la curva se desplaza a la derecha.</div></details>
+    </li>
+    <li class="q">Bajar costes desplaza la oferta a la derecha.
+      <details><summary>Solución</summary><div class="sol">Verdadero. A cada precio se ofrece una cantidad mayor.</div></details>
+    </li>
+    <li class="q">Con demanda lineal, la elasticidad es constante.
+      <details><summary>Solución</summary><div class="sol">Falso. La pendiente es constante; la elasticidad varía a lo largo de la curva.</div></details>
+    </li>
+    <li class="q">En \(|\varepsilon|=1\) el ingreso total es máximo.
+      <details><summary>Solución</summary><div class="sol">Verdadero (demanda lineal).</div></details>
+    </li>
+    <li class="q">La incidencia del impuesto siempre se reparte al 50%.
+      <details><summary>Solución</summary><div class="sol">Falso. Depende de elasticidades: paga más quien es menos elástico.</div></details>
+    </li>
+    <li class="q">Techo de precio por debajo de \(p^*\) genera escasez.
+      <details><summary>Solución</summary><div class="sol">Verdadero: \(Q_D>Q_S\).</div></details>
+    </li>
+    <li class="q">Precio mínimo por encima de \(p^*\) ⇒ excedente de oferta.
+      <details><summary>Solución</summary><div class="sol">Verdadero: \(Q_S>Q_D\).</div></details>
+    </li>
+    <li class="q">Si demanda y oferta se desplazan igual, el precio no cambia seguro.
+      <details><summary>Solución</summary><div class="sol">Falso en general. Depende de tamaños relativos y pendientes.</div></details>
+    </li>
+    <li class="q">DWL de impuesto es mayor con curvas más elásticas.
+      <details><summary>Solución</summary><div class="sol">Verdadero: mayor caída de cantidad.</div></details>
+    </li>
+    <li class="q">La elasticidad-precio es adimensional.
+      <details><summary>Solución</summary><div class="sol">Verdadero: razón porcentual.</div></details>
+    </li>
+    <li class="q">Aumentar \(a\) en \(Q=a-bp\) eleva \(p^*\) y \(q^*\).
+      <details><summary>Solución</summary><div class="sol">Verdadero (oferta fija).</div></details>
+    </li>
+    <li class="q">Un impuesto específico desplaza la oferta paralelamente hacia abajo.
+      <details><summary>Solución</summary><div class="sol">Falso. Hacia arriba (vertical \(+t\)).</div></details>
+    </li>
+    <li class="q">Demanda perfectamente inelástica ⇒ consumidores soportan todo el impuesto.
+      <details><summary>Solución</summary><div class="sol">Verdadero.</div></details>
+    </li>
+  </ol>
+
+  <h3>B) Tipo test</h3>
+  <ol class="alpha">
+    <li class="q">Con \(Q=120-3p\), en \(p=20\) la elasticidad es:
+      <details><summary>Solución</summary><div class="sol">C: −1. \(Q=60\), \(\varepsilon=-(3·20)/60=-1\).</div></details>
+    </li>
+    <li class="q">Si sube el precio de un complemento de X, la demanda de X…
+      <details><summary>Solución</summary><div class="sol">B: Disminuye (se desplaza a la izquierda).</div></details>
+    </li>
+    <li class="q">Un impuesto de 10 €/u. a productores hace que la oferta…
+      <details><summary>Solución</summary><div class="sol">B: Se desplace verticalmente hacia arriba 10.</div></details>
+    </li>
+    <li class="q">Con demanda lineal, el tramo alto de precios es:
+      <details><summary>Solución</summary><div class="sol">C: Elástico (|ε| grande).</div></details>
+    </li>
+    <li class="q">Techo de precio por debajo de \(p^*\):
+      <details><summary>Solución</summary><div class="sol">B: Escasez.</div></details>
+    </li>
+    <li class="q">Si \(|\varepsilon|<1\), al subir \(p\) el IT…
+      <details><summary>Solución</summary><div class="sol">A: Sube (demanda inelástica).</div></details>
+    </li>
+    <li class="q">En \(Q_S=-c+dp\), el intercepto de precio es:
+      <details><summary>Solución</summary><div class="sol">A: \(c/d\).</div></details>
+    </li>
+    <li class="q">Con curvas muy inelásticas, un impuesto…
+      <details><summary>Solución</summary><div class="sol">A: Recauda mucho y genera poca DWL.</div></details>
+    </li>
+    <li class="q">En \(Q=a-bp\), el intercepto precio es:
+      <details><summary>Solución</summary><div class="sol">A: \(a/b\).</div></details>
+    </li>
+    <li class="q">Si sube \(c\) en la oferta, entonces:
+      <details><summary>Solución</summary><div class="sol">C: \(p^*↑, q^*↓\) (oferta a la izquierda).</div></details>
+    </li>
+  </ol>
+
+  <h3>C) Problemas numéricos</h3>
+  <ol>
+    <li class="q">\(Q_D=120-3p\), \(Q_S=-30+2p\). Halla \(p^*, q^*, EC, EP\).
+      <details><summary>Solución</summary><div class="sol">
+        \(p^*=30\), \(q^*=30\). Interceptos: \(p_{intD}=40\), \(p_{intS}=15\).  
+        \(EC=\tfrac12(40-30)·30=150\). \(EP=\tfrac12(30-15)·30=225\).
+      </div></details>
+    </li>
+    <li class="q">Sube demanda: \(Q_D=140-3p\). Misma oferta. Nuevo (p,q) y EC,EP.
+      <details><summary>Solución</summary><div class="sol">
+        \(p'=34\), \(q'=38\). \(p_{intD}=46.67\).  
+        \(EC≈240.67\), \(EP=361\).
+      </div></details>
+    </li>
+    <li class="q">Elasticidad arco entre \(p_1=20\) y \(p_2=30\) (demanda anterior).
+      <details><summary>Solución</summary><div class="sol">
+        \(Q_1=60\), \(Q_2=30\) ⇒ \(\varepsilon_{arco}≈-1.667\).
+      </div></details>
+    </li>
+    <li class="q">Con \(Q=120-3p\), halla el \(p\) que maximiza \(IT\).
+      <details><summary>Solución</summary><div class="sol">
+        Máx IT cuando \(|\varepsilon|=1\) ⇒ \(p=20\), \(Q=60\).
+      </div></details>
+    </li>
+  </ol>
+</section>
+
+<section id="bloque2">
+  <h2>Bloque 2 — Impuestos y Controles de Precios</h2>
+
+  <h3>A) Verdadero/Falso</h3>
+  <ol>
+    <li class="q">Un impuesto específico a productores no cambia la pendiente de la oferta.
+      <details><summary>Solución</summary><div class="sol">Verdadero (desplaza verticalmente).</div></details>
+    </li>
+    <li class="q">Con demanda perfectamente elástica, los productores soportan todo el impuesto.
+      <details><summary>Solución</summary><div class="sol">Verdadero: el precio no puede subir; cae todo en productores.</div></details>
+    </li>
+    <li class="q">Si oferta es perfectamente inelástica, la DWL del impuesto es cero.
+      <details><summary>Solución</summary><div class="sol">Verdadero: no cae la cantidad.</div></details>
+    </li>
+    <li class="q">Un subsidio a consumidores desplaza la oferta a la derecha.
+      <details><summary>Solución</summary><div class="sol">Falso: desplaza la **demanda efectiva** (pasa a usar \(p-s\)).</div></details>
+    </li>
+    <li class="q">Un techo no vinculante no altera el equilibrio.
+      <details><summary>Solución</summary><div class="sol">Verdadero: si \(\bar p \ge p^*\) no afecta.</div></details>
+    </li>
+    <li class="q">Un precio mínimo vinculante puede requerir compras públicas para sostenerlo.
+      <details><summary>Solución</summary><div class="sol">Verdadero: para absorber el excedente.</div></details>
+    </li>
+    <li class="q">La recaudación siempre aumenta al subir el tipo del impuesto.
+      <details><summary>Solución</summary><div class="sol">Falso: si la base se contrae mucho, la recaudación puede caer (curva de Laffer).</div></details>
+    </li>
+    <li class="q">La parte del impuesto soportada por consumidores aumenta si la oferta se vuelve más inelástica.
+      <details><summary>Solución</summary><div class="sol">Verdadero: más inelástica la oferta ⇒ mayor carga en consumidores.</div></details>
+    </li>
+  </ol>
+
+  <h3>B) Tipo test</h3>
+  <ol class="alpha">
+    <li class="q">Impuesto \(t\) a productores en \(Q_D=a-bp\), \(Q_S=-c+dp\). El precio pagado por consumidores es:
+      <details><summary>Solución</summary><div class="sol">\(p_c=\dfrac{a+c+t}{b+d}\).</div></details>
+    </li>
+    <li class="q">Con techo \(\bar p < p^*\):  
+      <details><summary>Solución</summary><div class="sol">Escasez: \(Q_D(\bar p)-Q_S(\bar p)\).</div></details>
+    </li>
+    <li class="q">Con mínimo \(p_{min} > p^*\):  
+      <details><summary>Solución</summary><div class="sol">Excedente: \(Q_S(p_{min})-Q_D(p_{min})\).</div></details>
+    </li>
+    <li class="q">Incidencia en consumidores (aprox.) es:
+      <details><summary>Solución</summary><div class="sol">\(\dfrac{E_S}{E_S+|E_D|}\).</div></details>
+    </li>
+    <li class="q">DWL aproximada para t:
+      <details><summary>Solución</summary><div class="sol">\(\tfrac12\,t\,(q_0-q_1)\).</div></details>
+    </li>
+    <li class="q">Subsidio \(s\) a consumidores: demanda efectiva:
+      <details><summary>Solución</summary><div class="sol">\(Q=(a+bs)-bp\).</div></details>
+    </li>
+    <li class="q">Si demanda es muy inelástica y oferta elástica, ¿quién soporta más el impuesto?
+      <details><summary>Solución</summary><div class="sol">Consumidores.</div></details>
+    </li>
+  </ol>
+
+  <h3>C) Problemas numéricos</h3>
+  <ol>
+    <li class="q">\(Q_D=100-2p\), \(Q_S=-20+3p\). Impuesto \(t=10\) a productores. Halla \(p_c, p_p, q\).
+      <details><summary>Solución</summary><div class="sol">
+        \(p_c=\frac{100+20+10}{2+3}=26\). \(q=100-2·26=48\). \(p_p=p_c-t=16\).
+      </div></details>
+    </li>
+    <li class="q">Con los datos del (1), calcula recaudación y DWL aprox.
+      <details><summary>Solución</summary><div class="sol">
+        Antes: \(p_0=(100+20)/(5)=24\), \(q_0=52\).  
+        Recaudación \(T=10·48=480\). DWL≈\(\tfrac12·10·(52-48)=20\).
+      </div></details>
+    </li>
+    <li class="q">Mismo mercado, subsidio \(s=5\) a consumidores: \(p_c\) (pagado tras subsidio), \(p_{rec}\) (recibido), \(q\).
+      <details><summary>Solución</summary><div class="sol">
+        Demanda efectiva: \(a'=100+2·5=110\).  
+        \(p=\dfrac{110+20}{5}=26\). Cantidad \(q=110-2·26=58\).  
+        Consumidor paga \(p-s=21\). Productor recibe \(26\).
+      </div></details>
+    </li>
+    <li class="q">Techo \(\bar p=18\). Halla escasez.
+      <details><summary>Solución</summary><div class="sol">
+        \(Q_D=100-2·18=64\), \(Q_S=-20+3·18=34\). Escasez \(=30\).
+      </div></details>
+    </li>
+    <li class="q">Mínimo \(p_{min}=28\). Excedente de oferta y coste de compra pública si se absorbe.
+      <details><summary>Solución</summary><div class="sol">
+        \(Q_D=100-2·28=44\), \(Q_S=-20+3·28=64\). Excedente \(=20\).  
+        Coste si se compra: \(20·28=560\).
+      </div></details>
+    </li>
+    <li class="q">Compara incidencia cuando demanda pasa de elástica a inelástica (mismo t).
+      <details><summary>Solución</summary><div class="sol">
+        A mayor inelasticidad de la demanda, mayor parte del impuesto recae en consumidores.
+      </div></details>
+    </li>
+    <li class="q">Demuestra con números que con oferta casi vertical la DWL es pequeña.
+      <details><summary>Solución</summary><div class="sol">
+        Si \(Q_S=-c+\epsilon p\) con \(\epsilon\) pequeña, el cambio en \(q\) por el impuesto es muy pequeño ⇒ triángulo de DWL casi nulo.
+      </div></details>
+    </li>
+    <li class="q">Curva de Laffer (intuición numérica).
+      <details><summary>Solución</summary><div class="sol">
+        A t=0 ⇒ T=0. Para t moderado ⇒ T sube. Para t grande ⇒ base se hunde ⇒ T puede bajar. Ejemplo: si t sube y q cae de 48 a 20, T pasa de 480 a 400.
+      </div></details>
+    </li>
+  </ol>
+</section>
+
+</main>
+
+<script>
+  // Botón global para expandir/contraer todas las soluciones
+  (function(){
+    const btn = document.getElementById('toggleAll');
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('details').forEach(d => d.open = !d.open);
+    });
+  })();
+</script>
+</body>
+</html>
