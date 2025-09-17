@@ -1,0 +1,129 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan semanal – Versión fácil de leer</title>
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#1d2433;
+  --muted:#4b5563;
+  --border:#e5e7eb;
+  --header:#0f172a;
+  --accent:#2563eb;
+  --zebra:#f8fafc;
+  --zebra2:#eef2f7;
+}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.7;
+}
+.wrapper{max-width:1100px;margin:32px auto;padding:0 16px}
+h1{font-size:1.8rem;margin:0 0 6px 0;color:var(--header);}
+.lead{color:var(--muted);font-size:0.95rem;margin-bottom:16px}
+.card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:12px;padding:16px;margin:16px 0;
+}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+button{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:10px 14px;font-weight:600;cursor:pointer;font-size:0.95rem
+}
+button.secondary{background:#fff;border:1px solid var(--border);color:#111827}
+table{width:100%;border-collapse:separate;border-spacing:0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+thead th{
+  background:#f3f4f6;color:#111827;font-weight:700;
+  position:sticky;top:0;padding:10px;border-bottom:1px solid var(--border);text-align:left
+}
+tbody th{
+  background:#f9fafb;position:sticky;left:0;z-index:1;
+  color:#111827;font-weight:700;border-right:1px solid var(--border)
+}
+tbody td, tbody th{padding:10px;vertical-align:top;border-bottom:1px solid var(--border)}
+tbody tr:nth-child(odd) td{background:var(--zebra)}
+tbody tr:nth-child(even) td{background:var(--zebra2)}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{margin-top:6px;width:18px;height:18px;accent-color:var(--accent)}
+.small{color:var(--muted);font-size:0.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.badge{display:inline-block;background:#eef2ff;border:1px solid #e0e7ff;color:#3730a3;
+  padding:6px 10px;border-radius:999px;font-size:0.85rem;margin-right:6px;margin-bottom:6px}
+.footer{color:var(--muted);font-size:0.9rem}
+@media (max-width: 800px){
+  html{font-size:17px}
+  thead th, tbody th{position:static}
+  table{display:block;overflow:auto}
+}
+@media print{
+  html{font-size:12px}
+  .card{border-color:#ddd}
+  button{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <h1>Plan semanal – Dieta, Bebidas y Ejercicio</h1>
+  <p class="lead">Versión de lectura fácil: letra grande, alto contraste, filas en zebra, encabezados fijos, casillas para marcar e impresión limpia.</p>
+
+  <div class="card">
+    <div class="controls">
+      <button onclick="printPage()">Imprimir</button>
+      <button class="secondary" onclick="resetChecks()">Reiniciar casillas</button>
+    </div>
+    <table><thead><tr><th>Comida/Actividad</th><th>Lunes</th><th>Martes (Tenis)</th><th>Miércoles</th><th>Jueves (Tenis)</th><th>Viernes</th><th>Sábado</th><th>Domingo (Flexible)</th></tr></thead><tbody><tr><th>Desayuno</th><td><div class="check"><input type="checkbox" /><div>Avena 40 g + yogur natural desnatado 150 g + arándanos 50 g + nueces 15 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Pan integral 60 g + aguacate 50 g + 1 huevo (60 g) + 3 claras (90 g)</div></div></td><td><div class="check"><input type="checkbox" /><div>Avena 40 g + bebida vegetal sin azúcar 200 ml + plátano 120 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Pan integral 60 g + pechuga de pavo 40 g + tomate rallado 50 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Tortilla: 1 huevo (60 g) + 3 claras (90 g) + pan integral 50 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Avena 40 g + yogur desnatado 150 g + nueces 15 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Pan integral 60 g + aguacate 50 g + huevo duro 60 g</div></div></td></tr><tr><th>Media mañana</th><td><div class="check"><input type="checkbox" /><div>Manzana 150 g + almendras 15 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Yogur desnatado 150 g + nueces 15 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Mandarinas 200 g + almendras 15 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Batido: plátano 120 g + frutos rojos 80 g + bebida vegetal 200 ml</div></div></td><td><div class="check"><input type="checkbox" /><div>Yogur desnatado 150 g + manzana 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Kiwis 200 g + almendras 15 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Yogur desnatado 150 g + frutos rojos 80 g</div></div></td></tr><tr><th>Comida</th><td><div class="check"><input type="checkbox" /><div>Pollo 200 g + arroz integral 80 g (crudo) + ensalada 200 g + AOVE 10 ml</div></div></td><td><div class="check"><input type="checkbox" /><div>Pasta integral 80 g (crudo) + atún al natural 120 g + tomate 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Pavo 200 g + patata 200 g + ensalada 200 g + AOVE 10 ml</div></div></td><td><div class="check"><input type="checkbox" /><div>Arroz integral 80 g (crudo) + pollo 180 g + verduras 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Lentejas 70 g (crudo) + verduras 200 g + pescado blanco 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Pasta integral 80 g (crudo) + salmón 150 g + espinacas 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Paella 300–350 g (mejor marisco/pollo) o pollo 200 g + guarnición</div></div></td></tr><tr><th>Merienda</th><td><div class="check"><input type="checkbox" /><div>Proteína 30 g + plátano 120 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Proteína 30 g + plátano 120 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Yogur desnatado 150 g + fresas 100 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Proteína 30 g + yogur desnatado 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Proteína 30 g + nueces 15 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Yogur desnatado 150 g + avena 30 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Fruta 150 g o batido ligero (proteína 20 g + agua)</div></div></td></tr><tr><th>Cena</th><td><div class="check"><input type="checkbox" /><div>Salmón 150 g + espárragos 100 g + calabacín 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Merluza 180 g + brócoli 150 g + boniato 150 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Claras 150 g + champiñones 150 g + ensalada 100 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Dorada 180 g + calabacín 150 g + ensalada 100 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Pavo 200 g + ensalada 200 g</div></div></td><td><div class="check"><input type="checkbox" /><div>Pollo 200 g + verduras 200 g + leche de coco light 50 ml</div></div></td><td><div class="check"><input type="checkbox" /><div>Pescado blanco 180 g + verduras 200 g</div></div></td></tr><tr><th>Bebidas recomendadas</th><td><div class="check"><input type="checkbox" /><div>Agua, agua con gas + limón, té verde, infusiones sin azúcar</div></div></td><td><div class="check"><input type="checkbox" /><div>Agua con gas, té frío sin azúcar, kombucha ocasional</div></div></td><td><div class="check"><input type="checkbox" /><div>Agua con menta/pepino, rooibos, café solo o con leche desnatada</div></div></td><td><div class="check"><input type="checkbox" /><div>Agua con gas, infusiones, té verde</div></div></td><td><div class="check"><input type="checkbox" /><div>Agua con gas + limón, té frío casero</div></div></td><td><div class="check"><input type="checkbox" /><div>Agua, té de hierbas, kombucha sin azúcar ocasional</div></div></td><td><div class="check"><input type="checkbox" /><div>Agua, infusiones, cerveza 0,0 (máx. 1–2)</div></div></td></tr><tr><th>Ejercicio</th><td><div class="check"><input type="checkbox" /><div>Fuerza tren superior + bici 20 min (ligero, cuidar espalda)</div></div></td><td><div class="check"><input type="checkbox" /><div>Tenis 1 h + estiramientos espalda/core</div></div></td><td><div class="check"><input type="checkbox" /><div>Piernas + core (sentadilla asistida, zancadas, puente, planchas)</div></div></td><td><div class="check"><input type="checkbox" /><div>Tenis 1 h + estiramientos espalda/core</div></div></td><td><div class="check"><input type="checkbox" /><div>Full body (flexiones apoyadas, bandas, step-ups, planchas) + bici 20 min</div></div></td><td><div class="check"><input type="checkbox" /><div>Cardio bajo impacto: caminar 45 min o bici 30–40 min</div></div></td><td><div class="check"><input type="checkbox" /><div>Descanso activo: paseo, yoga, movilidad</div></div></td></tr></tbody></table>
+    <p class="small">Consejo: marca cada comida/entreno cuando lo completes. Se guarda automáticamente en tu navegador.</p>
+  </div>
+
+  <div class="card">
+    <h2>Bebidas recomendadas</h2>
+    <div class="grid"><span class="badge">Agua (fría/templada)</span><span class="badge">Agua con gas + limón</span><span class="badge">Infusiones sin azúcar</span><span class="badge">Té frío casero sin azúcar</span><span class="badge">Café solo o con leche desnatada (2–3 tazas)</span><span class="badge">Agua saborizada casera (limón, pepino, menta)</span><span class="badge">Kombucha sin azúcar (1 vaso/día)</span><span class="badge">Cerveza 0,0 (máx. 1–2/día)</span></div>
+    <p class="small">Evita refrescos azucarados o con edulcorantes frecuentes y zumos envasados. Prioriza agua e infusiones.</p>
+  </div>
+
+  <div class="card">
+    <h2>Lista de compra (1 semana · 1 persona)</h2>
+    
+<table>
+  <thead><tr><th>Producto</th><th>Cantidad semanal aprox.</th></tr></thead>
+  <tbody><tr><td>Avena</td><td>280 g</td></tr><tr><td>Yogur natural desnatado</td><td>1800 g</td></tr><tr><td>Arándanos</td><td>50 g</td></tr><tr><td>Nueces</td><td>90 g</td></tr><tr><td>Manzanas</td><td>450 g</td></tr><tr><td>Almendras</td><td>30 g</td></tr><tr><td>Pollo/pechuga</td><td>580 g</td></tr><tr><td>Arroz integral</td><td>160 g (crudo)</td></tr><tr><td>Verduras variadas (ensalada, calabacín, espárragos, brócoli, champiñones, espinacas)</td><td>2000 g</td></tr><tr><td>Aceite de oliva (AOVE)</td><td>70 ml</td></tr><tr><td>Proteína en polvo</td><td>240 g</td></tr><tr><td>Plátanos</td><td>600 g</td></tr><tr><td>Salmón</td><td>300 g</td></tr><tr><td>Pan integral</td><td>340 g</td></tr><tr><td>Aguacate</td><td>100 g</td></tr><tr><td>Huevos</td><td>5 uds + 450 g de claras</td></tr><tr><td>Atún al natural (lata)</td><td>120 g</td></tr><tr><td>Tomate</td><td>400 g</td></tr><tr><td>Merluza</td><td>180 g</td></tr><tr><td>Boniato</td><td>150 g</td></tr><tr><td>Mandarinas</td><td>200 g</td></tr><tr><td>Pavo</td><td>400 g</td></tr><tr><td>Patata</td><td>200 g</td></tr><tr><td>Fresas</td><td>100 g</td></tr><tr><td>Frutos rojos</td><td>160 g</td></tr><tr><td>Bebida vegetal sin azúcar</td><td>400 ml</td></tr><tr><td>Dorada</td><td>180 g</td></tr><tr><td>Lentejas (secas)</td><td>70 g (crudo)</td></tr><tr><td>Pescado blanco</td><td>330 g</td></tr><tr><td>Kiwis</td><td>200 g</td></tr><tr><td>Leche de coco light</td><td>50 ml</td></tr><tr><td>Arroz/Paella (domingo)</td><td>350 g</td></tr><tr><td>Guarniciones saludables (verduras extra)</td><td>200 g</td></tr><tr><td>Infusiones (té verde, rooibos, manzanilla)</td><td>Variado</td></tr><tr><td>Agua con gas</td><td>Libre</td></tr><tr><td>Cerveza 0,0 (opcional)</td><td>Máx. 2 uds</td></tr><tr><td>Kombucha sin azúcar (opcional)</td><td>2 botellas pequeñas</td></tr><tr><td>Chocolate 85% (snack 3–4/sem)</td><td>80 g</td></tr></tbody>
+</table>
+
+  </div>
+
+  <p class="footer">Nota: cantidades orientativas (2100–2300 kcal/día). Ajusta según hambre/progreso. Colesterol alto: limita huevos enteros a 4–5/semana (resto, claras).</p>
+</div>
+<script>
+const KEY='plan-checks-readable-v1';
+function save(){
+  const checks=[...document.querySelectorAll('input[type=checkbox]')].map(c=>c.checked);
+  localStorage.setItem(KEY, JSON.stringify(checks));
+}
+function load(){
+  const data=localStorage.getItem(KEY);
+  if(!data) return;
+  const checks=JSON.parse(data);
+  document.querySelectorAll('input[type=checkbox]').forEach((c,i)=>{
+    if(typeof checks[i] !== 'undefined') c.checked=checks[i];
+  });
+}
+function resetChecks(){
+  document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+  save();
+}
+function printPage(){ window.print(); }
+document.addEventListener('change', e=>{
+  if(e.target.matches('input[type=checkbox]')) save();
+});
+document.addEventListener('DOMContentLoaded', load);
+</script>
+</body>
+</html>
